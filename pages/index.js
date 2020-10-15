@@ -1,65 +1,77 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import GridList from '@material-ui/core/GridList'
+import GridListTile from '@material-ui/core/GridListTile'
+import useStyles from '../styles/index.style'
+
+const shopItems = [
+  {
+    img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1572724488232-JE38C6YWTJ533C8HW2H6/ke17ZwdGBToddI8pDm48kHkmoO6CwjuOxzvhX6rrD_lZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwEf0wcMRo4OMNBYSpBnK0Pu7oVS3afTdiQB852Y8PUn153X4VZRblL9NSYokvTbPw/IMG_5731.jpg?format=500w",
+    title: 'Desiccation Necklace',
+    price: "$350.00",
+    cols: 2,
+  },
+  {
+    img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1572459285704-92KRLH5A7BG2DPQ6QYU6/ke17ZwdGBToddI8pDm48kK4IyTFWj-nzmfy3qICdh8tZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIfVoY_Rut3bOGZ-U80-e8RRAOvpg_jB5mjURZQTSknjMKMshLAGzx4R3EDFOm1kBS/IMG_5673.jpg?format=500w",
+    title: "Unearthed Ring",
+    price: "$200.00",
+    cols: 1
+  },
+  {
+    img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1571428426947-I0PT9NZH3WHXOPQTFBI1/ke17ZwdGBToddI8pDm48kF8hYqNnYXbYA7qL3Yb3kUFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PICWdrp5BkIo-QhJYRUaTYGLNKvj9yBjp5P4wfrkz5K1sKMshLAGzx4R3EDFOm1kBS/IMG_5558.jpg?format=500w",
+    title: "Snowville Variscite Ring",
+    price: "$260.00",
+    cols: 1
+  },
+  {
+    img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1565648948191-EZ3X1DO5SN22NVM4JJSQ/ke17ZwdGBToddI8pDm48kAw-fh6CyRzfUxPzn4nnHWpZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PINX5TVWvKWpZpGfnmZ1pNk2DMKZ-LeeH8AimzmWqdaacKMshLAGzx4R3EDFOm1kBS/IMG_4509.jpg?format=500w",
+    title: 'Saguaro Variscite Signet Ring',
+    price: "$300.00",
+    cols: 1
+  },
+  {
+    img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1555033488968-IPQI38PNYJKDW7JOCKP3/ke17ZwdGBToddI8pDm48kPgv0ZItuOPhOZ1JEt0uc617gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdZuMiofIYA1YNg-cpohaGgSn53-I2sbAQSHhq9SgyQCm_c7z1K7QovUjPUprEAi5Q/LRG_DSC01274.JPG?format=500w",
+    title: 'Luster Ring',
+    price: "$350.00",
+    cols: 1
+  }
+]
 
 export default function Home() {
+  const classes = useStyles()
+  const [open, setOpen] = React.useState([])
+
+  const handleMouseOver = (i) => {
+    const newOpen = [...open]
+    newOpen[i] = true
+    setOpen(newOpen)
+  }
+  const handleMouseLeave = (i) => {
+      const newOpen = [...open]
+      newOpen[i] = false
+      setOpen(newOpen)
+  }
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Sacred Rites Jewelry</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <div className={classes.shopTitle}>Shop</div>
+      <div className={classes.root}>
+        <GridList className={classes.gridList} spacing={6} cellHeight={400} cols={3}>
+          {shopItems.map((item, i) => (
+            <GridListTile key={item.img} cols={item.cols || 1} 
+              onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}>
+                <img src={item.img} alt={item.title} />
+                {open[i] === true ? 
+                  <div className={classes.curtain} >
+                    <b className={classes.curtainText}>{item.title}, {item.price}</b>
+                  </div> : null}
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
     </div>
-  )
+    )
 }

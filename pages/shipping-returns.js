@@ -24,11 +24,11 @@ export default function ShippingReturns() {
         <Divider />
         <div className={classes.aboutContainer}>
             <p className={classes.aboutParagraph}>
-            <h1>Shipping Methods</h1>
+            <span>Shipping Methods</span>
                 Please allow 5-10 business days for shipping. Priority shipping & insurance is available if specified in message when ordering, however there will be an additional fee. Once shipped, you will receive an e-mail including the tracking number. I am not responsible for lost or stolen packages, but I will do my best to help track down your item for you.
             </p>
             <p className={classes.aboutParagraph}>
-            <h1>Custom Orders</h1>
+            <span>Custom Orders</span>
                 I take custom orders through e-mail, please contact me at SacredRitesJewelry@gmail.com.
             </p>
         </div>

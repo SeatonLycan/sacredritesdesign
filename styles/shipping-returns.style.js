@@ -6,7 +6,7 @@ export default makeStyles((theme) => createStyles({
         height: "auto",
         display: 'flex',
         justifyContent: "center",
-        marginTop: "50px",
+        marginTop: "40px",
     },
     returnPolicy : {
         textAlign: 'center',

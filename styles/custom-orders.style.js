@@ -26,7 +26,7 @@ export default makeStyles((theme) => createStyles({
     top: "50%",
     color: "white",
     lineHeight: '1.3em',
-    fontWeight: 400
+    fontWeight: 400,
   },
   customTitle: {
     width: "100%",

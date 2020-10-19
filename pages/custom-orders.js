@@ -4,6 +4,8 @@ import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import useStyles from '../styles/custom-orders.style'
 import Button from '@material-ui/core/Button';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 const shopItems = [
     {
@@ -41,6 +43,8 @@ const shopItems = [
 export default function CustomOrders() {
   const classes = useStyles()
   const [open, setOpen] = React.useState([])
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.down('sm'))
 
   const handleMouseOver = (i) => {
     const newOpen = [...open]
@@ -61,13 +65,15 @@ export default function CustomOrders() {
       </Head>
       <div className={classes.customTitle}>Custom Orders</div>
       <div className={classes.customButtons}>
-        <Button variant="outlined" style={{border: "2px solid"}}>PLACE AN ORDER</Button>
+        <Link className={classes.a} href='/contact'>
+          <Button variant="outlined" style={{border: "2px solid"}}>PLACE AN ORDER</Button>
+        </Link>
         <Link className={classes.a} href='/shipping-returns'>
             <Button variant="outlined" style={{border: "2px solid"}}>LEARN MORE</Button>
         </Link>
       </div>
       <div className={classes.root}>
-        <GridList className={classes.gridList} cellHeight={300} cols={3}>
+        <GridList className={classes.gridList} cellHeight={matches ? 200 : 300} cols={3}>
           {shopItems.map((item, i) => (
             <GridListTile key={item.img} cols={item.cols || 1} 
               onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}>

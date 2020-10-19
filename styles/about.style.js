@@ -7,7 +7,7 @@ export default makeStyles((theme) => createStyles({
         width: '100%',
         display: 'flex',
         justifyContent: "center",
-        marginTop: "50px",
+        marginTop: "40px",
     },
     quote : {
         margin: 'auto',

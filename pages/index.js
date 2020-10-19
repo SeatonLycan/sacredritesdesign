@@ -2,6 +2,8 @@ import Head from 'next/head'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import useStyles from '../styles/index.style'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 const shopItems = [
   {
@@ -39,6 +41,8 @@ const shopItems = [
 export default function Home() {
   const classes = useStyles()
   const [open, setOpen] = React.useState([])
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.down('sm'))
 
   const handleMouseOver = (i) => {
     const newOpen = [...open]
@@ -59,7 +63,7 @@ export default function Home() {
       </Head>
       <div className={classes.shopTitle}>Shop</div>
       <div className={classes.root}>
-        <GridList className={classes.gridList} spacing={6} cellHeight={400} cols={3}>
+        <GridList className={classes.gridList} spacing={6} cellHeight={matches ? 200 : 400} cols={3}>
           {shopItems.map((item, i) => (
             <GridListTile key={item.img} cols={item.cols || 1} 
               onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}>

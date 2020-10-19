@@ -28,12 +28,20 @@ export default makeStyles((theme) => createStyles({
     fontSize: "24px",
     fontFamily: 'proximaDova',
     textAlign: "center",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '16px'
+    },
   },
   curtainText: {
     position: "relative",
-    top: "50%",
+    top: '100px',
     color: "white",
     lineHeight: '1.3em',
-    fontWeight: 400
+    fontWeight: 400,
+    [theme.breakpoints.down('sm')]: {
+       lineHeight: '0.75em',
+       fontWeight: 200,
+       top: '50px'
+    },
   }
 }));

@@ -33,6 +33,7 @@ export default makeStyles((theme) => createStyles({
     },
   },
   curtainText: {
+    display: 'block',
     position: "relative",
     top: '100px',
     color: "white",
@@ -43,5 +44,55 @@ export default makeStyles((theme) => createStyles({
        fontWeight: 200,
        top: '50px'
     },
-  }
+  },
+  quickView: {
+    position: "relative",
+    top: '130px',
+    color: "white",
+    lineHeight: '1.3em',
+    fontWeight: 400,
+    border: '3px solid',
+    [theme.breakpoints.down('sm')]: {
+       lineHeight: '0.75em',
+       fontWeight: 200,
+       top: '80px'
+    },
+  },
+  dialogContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: '80vh',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+   },
+  },
+  dialogImage: {
+    width: '60%',
+    [theme.breakpoints.down('sm')]: {
+      width: '90%',
+      margin: 'auto',
+      order: 2
+   },
+  },
+  dialogItemInfoContainer: {
+    marginLeft: '10px',
+    width: '40%',
+    [theme.breakpoints.down('sm')]: {
+      width: '80%',
+      marginLeft: '5%',
+      order: 1,
+      marginBottom: '20px'
+   },
+  },
+  closeIcon: {
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: '95%'
+   },
+  },
+  divider: {
+    width: '40px',
+    backgroundColor: 'black', 
+    marginTop: '20px',
+    height: '2px'
+  },
 }));

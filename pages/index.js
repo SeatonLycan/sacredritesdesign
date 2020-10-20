@@ -1,9 +1,16 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import useStyles from '../styles/index.style'
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core/styles'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import Button from '@material-ui/core/Button'
+import Divider from '@material-ui/core/Divider'
+import CloseIcon from '@material-ui/icons/Close'
+import IconButton from '@material-ui/core/IconButton'
 
 const shopItems = [
   {
@@ -40,10 +47,16 @@ const shopItems = [
 
 export default function Home() {
   const classes = useStyles()
-  const [open, setOpen] = React.useState([])
+  const [open, setOpen] = useState([])
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('sm'))
+  const [openDialog, setOpenDialog] = useState(false)
+  const [dialogInfo, setDialogInfo] = useState([])
 
+  const handleListItemClick = (value) => {
+    setOpenDialog(true)
+    setDialogInfo(shopItems[value])
+  }
   const handleMouseOver = (i) => {
     const newOpen = [...open]
     newOpen[i] = true
@@ -56,6 +69,7 @@ export default function Home() {
   }
 
   return (
+    <>
     <div>
       <Head>
         <title>Sacred Rites Jewelry</title>
@@ -71,11 +85,36 @@ export default function Home() {
                 {open[i] === true ? 
                   <div className={classes.curtain} >
                     <b className={classes.curtainText}>{item.title}, {item.price}</b>
+                    <Button className={classes.quickView} variant="outlined" color="secondary"
+                      onClick={() => {handleListItemClick(i)}}>
+                        Quick View
+                    </Button>
                   </div> : null}
             </GridListTile>
           ))}
         </GridList>
       </div>
     </div>
+
+    <Dialog fullWidth={true} maxWidth = {'md'} onClose={() => {setOpenDialog(false)}} open={openDialog}>
+      <DialogContent className={classes.dialogContainer}>
+        <img className={classes.dialogImage} src={dialogInfo.img}/>
+        <div className={classes.dialogItemInfoContainer}>
+          <h1 style={{ fontWeight: 200 }}>{dialogInfo.title}</h1>
+          <Divider className={classes.divider}/>
+          <h1 style={{fontWeight: 200}}>{dialogInfo.price}</h1>
+          {/* TODO : add details and specs when app is no longer using dummy data */}
+          {/* <h2>{itemInfo.details}</h2>
+          <h2>{itemInfo.specs}</h2> */}
+          <Button variant="outlined" className={classes.addToCart}>ADD TO CART</Button>
+        </div>
+        <div className={classes.closeIcon}>
+          <IconButton onClick={() => {setOpenDialog(false)}}>
+            <CloseIcon />
+          </IconButton>
+        </div>
+      </DialogContent>
+    </Dialog>
+    </>
     )
 }

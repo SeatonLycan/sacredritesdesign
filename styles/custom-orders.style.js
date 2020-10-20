@@ -40,7 +40,21 @@ export default makeStyles((theme) => createStyles({
       justifyContent: 'space-evenly',
       marginBottom: '20px'
   },
-  a : {
-      textDecoration: 'none'
+  dialogImage: {
+    objectFit: 'cover',
+    height: '100vh',
+    width: 'auto',
+    [theme.breakpoints.down('sm')]: {
+      height: '60vh'
+   },
+  },
+  closeIcon: {
+    position: 'fixed',
+    left: '95%',
+    top: '5%',
+    cursor: 'pointer',
+    [theme.breakpoints.down('sm')]: {
+      left: '90%'
+   },
   }
 }));

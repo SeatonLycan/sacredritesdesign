@@ -1,11 +1,15 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import useStyles from '../styles/custom-orders.style'
-import Button from '@material-ui/core/Button';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core/styles'
+import Dialog from '@material-ui/core/Dialog'
+import CloseIcon from '@material-ui/icons/Close'
+import IconButton from '@material-ui/core/IconButton'
 
 const shopItems = [
     {
@@ -45,7 +49,13 @@ export default function CustomOrders() {
   const [open, setOpen] = React.useState([])
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('sm'))
+  const [openDialog, setOpenDialog] = useState(false)
+  const [dialogImage, setDialogImage] = useState('')
 
+  const handleListItemClick = (value) => {
+    setOpenDialog(true)
+    setDialogImage(value)
+  }
   const handleMouseOver = (i) => {
     const newOpen = [...open]
     newOpen[i] = true
@@ -58,6 +68,7 @@ export default function CustomOrders() {
   }
 
   return (
+    <>
     <div>
       <Head>
         <title>Custom Orders - Sacred Rites Jewelry</title>
@@ -65,10 +76,10 @@ export default function CustomOrders() {
       </Head>
       <div className={classes.customTitle}>Custom Orders</div>
       <div className={classes.customButtons}>
-        <Link className={classes.a} href='/contact'>
+        <Link href='/contact'>
           <Button variant="outlined" style={{border: "2px solid"}}>PLACE AN ORDER</Button>
         </Link>
-        <Link className={classes.a} href='/shipping-returns'>
+        <Link href='/shipping-returns'>
             <Button variant="outlined" style={{border: "2px solid"}}>LEARN MORE</Button>
         </Link>
       </div>
@@ -76,7 +87,8 @@ export default function CustomOrders() {
         <GridList className={classes.gridList} cellHeight={matches ? 200 : 300} cols={3}>
           {shopItems.map((item, i) => (
             <GridListTile key={item.img} cols={item.cols || 1} 
-              onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}>
+              onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}
+                onClick={() => {handleListItemClick(item.img)}}>
                 <img src={item.img} alt={item.title} />
                 {open[i] === true ? 
                   <div className={classes.curtain} >
@@ -86,5 +98,11 @@ export default function CustomOrders() {
         </GridList>
       </div>
     </div>
+
+    <Dialog onClose={() => {setOpenDialog(false)}} open={openDialog}>
+        <img className={classes.dialogImage} src={dialogImage}/>
+          <CloseIcon className={classes.closeIcon} onClick={() => {setOpenDialog(false)}}/>
+    </Dialog>
+    </>
     )
 }

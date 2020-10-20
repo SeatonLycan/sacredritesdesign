@@ -8,6 +8,9 @@ export default makeStyles((theme) => createStyles({
         display: 'flex',
         justifyContent: "center",
         marginTop: "40px",
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '0px'
+        },
     },
     quote : {
         margin: 'auto',
@@ -21,7 +24,7 @@ export default makeStyles((theme) => createStyles({
         lineHeight: '2em',
         [theme.breakpoints.down('sm')]: {
             width: "90%"
-          },
+        },
     },
     quoteText: {
         display: "block"

@@ -7,6 +7,9 @@ export default makeStyles((theme) => createStyles({
         justifyContent: 'center',
         flexDirection: 'column',
         marginTop: "40px",
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '0px'
+        },
     },
     contact: {
         margin: 'auto',

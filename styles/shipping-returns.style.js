@@ -7,6 +7,9 @@ export default makeStyles((theme) => createStyles({
         display: 'flex',
         justifyContent: "center",
         marginTop: "40px",
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '0px'
+        },
     },
     returnPolicy : {
         textAlign: 'center',

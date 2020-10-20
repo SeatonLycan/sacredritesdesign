@@ -32,6 +32,19 @@ export default responsiveFontSizes((createMuiTheme)({
         lineHeight: '1.3em',
       },
       overrides: {
+        MuiCssBaseline: {
+          '@global': {
+            a: {
+              textDecoration: 'none',
+              color: 'black'
+            },
+            h2: {
+              fontWeight: 200,
+              fontSize: '14px',
+              lineHeight: '30px'
+            }
+          },
+        },
         MuiButton: {
           root: {
             borderRadius: 3,

@@ -10,14 +10,17 @@ const CheckoutForm = (props) => {
     const [error, setError] = useState(false)
     const contactEmail = 'slycan42@gmail.com'
 
-    // TODO : fix the email text to clearly display the items purchased.
-
     return (
         <Formik
           validationSchema={CheckoutSchema}
           onSubmit={async (values) => {
             setError(false);
             const { email } = values;
+            const tempItems = []
+            var i = 0
+            {props.items.map((item, i) => {
+              tempItems.push(i + 1 +'. ' + item.name + ', ' + '$' +  item.price + ', ' + item.details + '-----')
+            })}
             await db
               .collection('mail')
               .add({
@@ -25,9 +28,9 @@ const CheckoutForm = (props) => {
                 replyTo: email,
                 message: {
                   subject: 'Purchased Items',
-                  text: 'items purchased:   ' + JSON.stringify(props.items.name)
+                  text: 'Purchased Items:   ' + tempItems + '\ Contact: ' + email
               }
-            });
+            })
         }}
 		    initialValues={initialValues}
         >

@@ -32,6 +32,7 @@ export default makeStyles((theme) => createStyles({
         },
     },
     checkout: {
+        padding: '20px',
         margin: 'auto',
         display: 'flex',
         flexDirection: 'column',

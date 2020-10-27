@@ -45,9 +45,9 @@ export default makeStyles((theme) => createStyles({
        top: '50px'
     },
   },
-  quickView: {
-    position: "relative",
-    top: '130px',
+  dialogViewButton: {
+    position: "absolute",
+    top: '50%',
     color: "white",
     lineHeight: '1.3em',
     fontWeight: 400,
@@ -55,28 +55,44 @@ export default makeStyles((theme) => createStyles({
     [theme.breakpoints.down('sm')]: {
        lineHeight: '0.75em',
        fontWeight: 200,
-       top: '80px'
     },
+  },
+  dialogPaper: {
+    minHeight: '80vh',
+    maxHeight: '80vh',
+    minWidth: '70vw',
   },
   dialogContainer: {
     display: 'flex',
     flexDirection: 'row',
-    height: '80vh',
     [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
+      flexDirection: 'column'
+   },
+  },
+  dialogImageContainer: {
+    height: '400px',
+    minHeight: '400px',
+    marginBottom: '10px',
+    width: '400px',
+    minWidth: '40%',
+    position: 'relative',
+    top: 0,
+    left: 0,
+    [theme.breakpoints.down('sm')]: {
+      width: '90%',
+      order: 2,
+      margin: 'auto',
+      height: 'auto'
    },
   },
   dialogImage: {
-    width: '60%',
-    [theme.breakpoints.down('sm')]: {
-      width: '90%',
-      margin: 'auto',
-      order: 2
-   },
+    maxHeight: '100%',
+    maxWidth: '100%',
+    minHeight: '100%',
+    minWidth: '100%'
   },
   dialogItemInfoContainer: {
-    marginLeft: '10px',
-    width: '40%',
+    marginLeft: '50px',
     [theme.breakpoints.down('sm')]: {
       width: '80%',
       marginLeft: '5%',
@@ -85,9 +101,10 @@ export default makeStyles((theme) => createStyles({
    },
   },
   closeIcon: {
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: '95%'
-   },
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    color: 'black'
   },
   divider: {
     width: '40px',
@@ -95,4 +112,7 @@ export default makeStyles((theme) => createStyles({
     marginTop: '20px',
     height: '2px'
   },
+  priceAndName: {
+    fontWeight: 200
+  }
 }));

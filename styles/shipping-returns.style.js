@@ -29,7 +29,7 @@ export default makeStyles((theme) => createStyles({
     returnText: {
         display: "block"
     },
-    aboutContainer: {
+    infoContainer: {
         backgroundColor: "rgba(90,90,90,.1)", 
         height: "auto",
         display: 'flex',
@@ -40,7 +40,7 @@ export default makeStyles((theme) => createStyles({
             justifyContent: "center",
           },
     },
-    aboutParagraph: {
+    infoParagraph: {
         width: "20%",
         marginTop: "40px",
         marginBottom: "40px",
@@ -51,5 +51,13 @@ export default makeStyles((theme) => createStyles({
             marginBottom: "30px",
             marginTop: "30px"
         },
+    },
+    spanTitle: {
+        display: 'block',
+        fontSize: '24px',
+        marginBottom: '20px'
+    },
+    returnMessage: {
+        fontSize: '16px'
     }
 }))

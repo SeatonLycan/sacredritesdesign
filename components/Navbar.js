@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState} from 'react'
 import Link from 'next/link'
 import Divider from '@material-ui/core/Divider'
 import useStyles from './Navbar.style'
@@ -6,11 +6,12 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 export default function Navbar() {
   const classes=useStyles()
   const [menuAnchorElement, setMenuAnchorElement] = useState(null)
-
+  
   const handleSmallMenuClick = (event) => {
     setMenuAnchorElement(event.currentTarget)
   }
@@ -37,11 +38,16 @@ export default function Navbar() {
             <Link href='/contact'>
                 <a className={classes.a}>Contact</a>
             </Link>
+            <Link href='/shopping-cart'>
+              <a className={classes.a}>Shopping Cart</a>
+            </Link>
             <Divider />
         </div>
+
       </div>
       <div className={classes.container}>
-        <img src="/favicon.ico" className={classes.logo} />
+        <img src="https://firebasestorage.googleapis.com/v0/b/sacred-rites-jewelry.appspot.com/o/siteLogo%2FSR_SNAKE_2.jpg?alt=media&token=fd0a4537-7133-49ed-9e06-014016d3d64b"
+          className={classes.logo} />
       </div>
       <div className={classes.container}>
         <h1 className={classes.header}>Sacred Rites Jewelry</h1>
@@ -60,38 +66,45 @@ export default function Navbar() {
               open={Boolean(menuAnchorElement)}
               onClose={handleCloseSmallMenu}
             >
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/'>
-                  <a>Shop</a>
-                </Link>
-              </MenuItem>
+              <Link href='/'>
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                    <a>Shop</a>
+                </MenuItem>
+              </Link>
               <Divider />
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/'>
-                  <a>Features</a>
-                </Link>
-              </MenuItem>
+              <Link href='/'>
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                    <a>Features</a>
+                </MenuItem>
+              </Link>
               <Divider />
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/custom-orders'>
-                  <a>Custom Orders</a>
-                </Link>
-              </MenuItem>
+              <Link href='/custom-orders'>
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                    <a>Custom Orders</a>
+                </MenuItem>
+              </Link>
               <Divider />
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/about'>
-                  <a>About</a>
-                </Link>
-              </MenuItem>
+              <Link href='/about'>
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                    <a>About</a>
+                </MenuItem>
+              </Link>
               <Divider />
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/contact'>
-                  <a>Contact</a>
-                </Link>
-              </MenuItem>
+              <Link href='/contact'>
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                    <a>Contact</a>
+                </MenuItem>
+              </Link>
             </Menu>
         </div>
         <div className={classes.headerCenterSmall}>Sacred Rites Jewelry</div>
+        <div className={classes.headerRightSmall}>
+        <Link href='/shopping-cart'>
+          <IconButton>
+            <ShoppingCartIcon style={{color: 'white'}}/>
+          </IconButton>
+        </Link>
+        </div>
       </div>
     </>
   );

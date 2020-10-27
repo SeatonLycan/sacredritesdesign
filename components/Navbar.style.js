@@ -38,19 +38,20 @@ export default makeStyles((theme) => createStyles({
       }
     },
     headerCenterSmall: {
-      flex: 1,
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
       color: 'white',
-      fontSize: '24px',
       [theme.breakpoints.down('sm')]: {
-        marginLeft: -52,
-      },
-      [theme.breakpoints.down('xs')]: {
-        marginLeft: -42,
         fontSize: '16px'
       },
+    },
+    headerRightSmall: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      }
     },
     logo: {
       height: "80px",

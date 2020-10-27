@@ -5,6 +5,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import { db } from '../firebase/firebase'
+import Cookies from 'js-cookie'
 
 const CheckoutForm = (props) => {
     const [error, setError] = useState(false)
@@ -17,7 +18,6 @@ const CheckoutForm = (props) => {
             setError(false);
             const { email } = values;
             const tempItems = []
-            var i = 0
             {props.items.map((item, i) => {
               tempItems.push(i + 1 +'. ' + item.name + ', ' + '$' +  item.price + ', ' + item.details + '-----')
             })}
@@ -31,6 +31,10 @@ const CheckoutForm = (props) => {
                   text: 'Purchased Items:   ' + tempItems + '\ Contact: ' + email
               }
             })
+            {props.items.map(item => {
+              Cookies.remove('item_' + item.query)
+            })}
+            props.handlePurchase()
         }}
 		    initialValues={initialValues}
         >
@@ -48,6 +52,7 @@ const CheckoutForm = (props) => {
                 fullWidth
                 margin="normal"
                 variant="outlined"
+                disabled={props.items.length === 0}
               />
               {error && (
                 <FormHelperText error>{error}</FormHelperText>
@@ -58,7 +63,7 @@ const CheckoutForm = (props) => {
                   size="large"
                   color="secondary"
                   type="submit"
-                  disabled={Boolean(Object.keys(errors).length)}
+                  disabled={Boolean(Object.keys(errors).length) || props.items.length === 0}
                   label="Continue"
                   variant="contained"
                 >

@@ -2,9 +2,10 @@ import { createStyles, makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles((theme) => createStyles({
     cartContainer: {
-        backgroundColor: "rgba(90,90,90,.1)", 
-        height: "auto",
-        width: '100%',
+        backgroundColor: "rgba(90,90,90,.1)",
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
         marginTop: "40px",
         [theme.breakpoints.down('sm')]: {
             marginTop: '0px'
@@ -15,9 +16,6 @@ export default makeStyles((theme) => createStyles({
         fontWeight: 500,
         marginTop: '40px',
         marginBottom: '20px',
-        [theme.breakpoints.down('sm')]: {
-            marginTop: '0px'
-        },
     },
     cartItems: {
         margin: 'auto',
@@ -64,5 +62,19 @@ export default makeStyles((theme) => createStyles({
     },
     checkoutButton: {
         marginBottom: '20px'
+    },
+    noItems: {
+        fontSize: '24px',
+    },
+    purchaseInfo: {
+        width: '80%',
+        margin: 'auto',
+        marginBottom: '40px'
+    },
+    purchasedMessage: {
+        textAlign: 'center',
+        fontSize: '24px',
+        marginTop: '40px',
+        marginBottom: '40px'
     }
 }))

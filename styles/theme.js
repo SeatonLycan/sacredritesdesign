@@ -42,12 +42,18 @@ export default responsiveFontSizes((createMuiTheme)({
               fontWeight: 200,
               fontSize: '14px',
               lineHeight: '30px'
-            }
+            },
           },
         },
         MuiButton: {
           root: {
             borderRadius: 3,
+          }
+        },
+        MuiDialogContent: {
+          root: {
+            padding: '10px',
+            marginLeft: '10px'
           }
         }
       }

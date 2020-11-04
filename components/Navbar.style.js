@@ -76,5 +76,15 @@ export default makeStyles((theme) => createStyles({
       textTransform: 'uppercase',
       letterSpacing: '1px',
       lineHeight: '1.3em',
+      textAlign: 'center'
+    },
+    aSmall: {
+      fontFamily: 'proximaDova',
+      fontStyle: 'normal',
+      textTransform: 'uppercase',
+      letterSpacing: '1px',
+      textAlign: 'center',
+      margin: 'auto',
+      fontSize: '11px'
     }
   }));

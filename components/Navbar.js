@@ -26,11 +26,8 @@ export default function Navbar() {
           <Link href='/'>
                 <a className={classes.a}>Shop</a>
             </Link>
-            <Link href='/'>
-                <a className={classes.a}>Features</a>
-            </Link>
             <Link href='/custom-orders'>
-                <a className={classes.a}>Custom Orders</a>
+                <a className={classes.a}>Customs</a>
             </Link>
             <Link href='/about'>
                 <a className={classes.a}>About</a>
@@ -39,7 +36,7 @@ export default function Navbar() {
                 <a className={classes.a}>Contact</a>
             </Link>
             <Link href='/shopping-cart'>
-              <a className={classes.a}>Shopping Cart</a>
+              <a className={classes.a}>Cart</a>
             </Link>
             <Divider />
         </div>
@@ -66,35 +63,29 @@ export default function Navbar() {
               open={Boolean(menuAnchorElement)}
               onClose={handleCloseSmallMenu}
             >
-              <Link href='/'>
-                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                    <a>Shop</a>
-                </MenuItem>
-              </Link>
+              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                <Link href='/'>
+                  <a className={classes.aSmall}>Shop</a>
+                </Link>
+              </MenuItem>
               <Divider />
-              <Link href='/'>
-                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                    <a>Features</a>
-                </MenuItem>
-              </Link>
+              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                <Link href='/custom-orders'>
+                    <a className={classes.aSmall}>Customs</a>
+                </Link>
+              </MenuItem>
               <Divider />
-              <Link href='/custom-orders'>
-                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                    <a>Custom Orders</a>
-                </MenuItem>
-              </Link>
+              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                <Link href='/about'>
+                    <a className={classes.aSmall}>About</a>
+                </Link>
+              </MenuItem>
               <Divider />
-              <Link href='/about'>
-                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                    <a>About</a>
-                </MenuItem>
-              </Link>
-              <Divider />
-              <Link href='/contact'>
-                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                    <a>Contact</a>
-                </MenuItem>
-              </Link>
+              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                <Link href='/contact'>
+                    <a className={classes.aSmall}>Contact</a>
+                </Link>
+              </MenuItem>
             </Menu>
         </div>
         <div className={classes.headerCenterSmall}>Sacred Rites Jewelry</div>

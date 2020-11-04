@@ -5,6 +5,7 @@ var firebase = require("firebase/app")
 // Add the Firebase products that you want to use
 require("firebase/auth")
 require("firebase/firestore")
+require("firebase/storage")
 
 const firebaseConfig = {
   apiKey: "AIzaSyCKCpgLdlUso9M-C-cdfKmGdkSGRh41yzY",
@@ -22,3 +23,4 @@ if (!firebase.apps.length) {
 
 export const db = firebase.firestore()
 export const auth = firebase.auth()
+export default firebase

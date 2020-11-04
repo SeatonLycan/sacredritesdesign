@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { db } from '../firebase/firebase'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -14,6 +14,10 @@ import Divider from '@material-ui/core/Divider'
 import CloseIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
 import Cookies from 'js-cookie'
+import AdminContext from '../contexts/AdminContext'
+import Fab from '@material-ui/core/Fab'
+import AddIcon from '@material-ui/icons/Add'
+import AddItemDialog from '../components/AddItemDialog'
 
 export default function Home() {
   const classes = useStyles()
@@ -23,6 +27,8 @@ export default function Home() {
   const [openDialog, setOpenDialog] = useState(false)
   const [dialogInfo, setDialogInfo] = useState([])
   const [items, setItems] = useState([])
+  const admin = useContext(AdminContext)
+  const [addItemDialogOpen, setAddItemDialogOpen] = useState(false)
  
   useEffect(() => {
     const tempItems = []
@@ -53,6 +59,9 @@ export default function Home() {
   }
   const handleAddToCart = (item) => {
     Cookies.set('item_' + item, item, { expires: 1})
+  }
+  const closeAddItemDialog = (value) => {
+    setAddItemDialogOpen(value)
   }
 
   return (
@@ -86,6 +95,26 @@ export default function Home() {
           ))}
         </GridList>
       </div>
+      {/* Admin Only: Add Item to shop */}
+      {admin.admin ? 
+      <Fab variant="extended" color="primary" aria-label="add" 
+        onClick={() => {setAddItemDialogOpen(true)}}
+        style={{position: 'fixed', bottom: 10, right: 10}}
+        >
+          <AddIcon />
+          Add Item
+      </Fab> : null
+      }
+      <Dialog
+        onClose={() => setAddItemDialogOpen(false)}
+        open={addItemDialogOpen}
+        fullWidth={true}
+        maxWidth='sm'
+      >
+        <AddItemDialog 
+          onClose={closeAddItemDialog}
+        />
+      </Dialog>
     </div>
 
     <Dialog fullWidth={true} maxWidth='md' 

@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState, useContext } from 'react'
 import Link from 'next/link'
 import Divider from '@material-ui/core/Divider'
 import useStyles from './Navbar.style'
@@ -7,9 +7,11 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import AdminContext from '../contexts/AdminContext'
 
 export default function Navbar() {
   const classes=useStyles()
+  const admin = useContext(AdminContext)
   const [menuAnchorElement, setMenuAnchorElement] = useState(null)
   
   const handleSmallMenuClick = (event) => {
@@ -38,6 +40,9 @@ export default function Navbar() {
             <Link href='/shopping-cart'>
               <a className={classes.a}>Cart</a>
             </Link>
+            {admin.admin ? <Link href='/admin'>
+              <a className={classes.a}>Admin</a>
+            </Link> : null }
             <Divider />
         </div>
 
@@ -86,6 +91,13 @@ export default function Navbar() {
                     <a className={classes.aSmall}>Contact</a>
                 </Link>
               </MenuItem>
+              <Divider />
+              {admin.admin ? 
+              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                <Link href='/admin'>
+                    <a className={classes.aSmall}>Admin</a>
+                </Link>
+              </MenuItem> : null }
             </Menu>
         </div>
         <div className={classes.headerCenterSmall}>Sacred Rites Jewelry</div>

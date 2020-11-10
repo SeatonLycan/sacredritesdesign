@@ -141,6 +141,9 @@ export default function Home() {
               className={classes.addToCart}>
                 ADD TO CART
             </Button>
+            <Link href={`/shop/${dialogInfo.query}`}>
+              <a className={classes.viewFullItem}>View Full Item</a>
+            </Link>
           </div>
 
           <IconButton className={classes.closeIcon} onClick={() => {setOpenDialog(false)}}>

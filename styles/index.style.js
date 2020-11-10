@@ -114,5 +114,10 @@ export default makeStyles((theme) => createStyles({
   },
   priceAndName: {
     fontWeight: 200
+  },
+  viewFullItem: {
+    display: 'block',
+    textDecoration: 'underline',
+    paddingTop: '20px'
   }
 }));

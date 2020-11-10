@@ -10,6 +10,7 @@ const AddItemSchema = Yup.object().shape({
 })
 
 export const initialValues = {
+    title: '',
     price: '',
     details: '',
     specs: ''

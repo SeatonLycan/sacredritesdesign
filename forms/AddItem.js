@@ -13,8 +13,8 @@ const AddItemForm = (props) => {
       validationSchema={AddItemSchema}
       onSubmit={(values) => {
         setError(false)
-        const { title, query, price, details, specs } = values
-        props.submitItem(title, query, price, details, specs)
+        const { title, price, details, specs } = values
+        props.submitItem(title, price, details, specs)
         console.log('item submitted')
       }}
       initialValues={initialValues}
@@ -28,16 +28,6 @@ const AddItemForm = (props) => {
             <Field
               name="title"
               label="Title"
-              type="string"
-              component={TextField}
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              disabled={props.imageDropped === false}
-            />
-            <Field
-              name="query"
-              label="Query"
               type="string"
               component={TextField}
               fullWidth

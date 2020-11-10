@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
-import React, {useCallback, useState} from 'react'
+import React, { useState } from 'react'
 import {useDropzone} from 'react-dropzone'
 import AddItemForm from '../forms/AddItem'
 import GridList from '@material-ui/core/GridList'
@@ -27,9 +27,15 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
       marginBottom: '10px'
     },
+    removeImage: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      color: 'white'
+    }
 }))
 
-const AddItemDialog = () => {
+const AddItemDialog = (props) => {
   const classes = useStyles()
   const [imageDropped, setImageDropped] = useState(false)
   const [images, setImages] = useState([])
@@ -53,55 +59,54 @@ const onDrop = (files) => {
   })
 })}
 
-// TODO: Fix async function and add redirect after item is posted
-const submitItem = async (name, query, price, details, specs) => {
-  const tempImageURLs = []
-  console.log(tempImageURLs)
-
-  const sendPosts = () => {
-    var doc = db.collection('shop').doc()
-      doc.set({
-        name,
-        query,
-        price,
-        details,
-        specs,
-        images: tempImageURLs,
-        created: firebase.firestore.Timestamp.now(),
-      })
+const removeImage = (i) => {
+  const tempImages = [...images]
+  const tempImageFiles = [...imageFiles]
+  tempImages.splice(i, 1)
+  tempImageFiles.splice(i, 1)
+  setImages(tempImages)
+  setImageFiles(tempImageFiles)
+  if (tempImages.length === 0){
+    setImageDropped(false)
   }
-  
-  const createPosts = async () => { await Promise.all(imageFiles.map(async (image) => {
-      await firebase.storage().ref(`shopItems/${query}/${image.name}`).put(image)
-        firebase.storage().ref(`/shopItems/${query}/`).child(image.name)
+}
+
+// TODO: Fix async function and add redirect after item is posted
+const submitItem = async (name, price, details, specs) => {
+  const query = name.replace(' ', '-').toLowerCase()
+  const images = []
+  var i = 0
+
+  const putImages = async () => {
+    for (const image of imageFiles){
+    await firebase.storage().ref(`shopItems/${query}/${image.name}`).put(image)
+      .then(async () => {
+        await firebase.storage().ref(`/shopItems/${query}`).child(image.name)
           .getDownloadURL().then(function(imageURL){
-            tempImageURLs.push(imageURL)
+            images[i] = imageURL
+            i += 1
         })
-  }))
-  return sendPosts()
+      })
+    }
+  }
+  putImages().then(() => {
+    var doc = db.collection('shop').doc()
+    doc.set({
+      name,
+      query,
+      price,
+      details,
+      specs,
+      images,
+      created: firebase.firestore.Timestamp.now(),
+    })
+    }
+  )
+  .then(() => {
+    props.onClose()
+    props.itemAdded()
+  })
 }
-
-  createPosts()
-}
-
-// imageFiles.map((image) => {
-//   firebase.storage().ref(`shopItems/${query}/${image.name}`).put(image)
-//   firebase.storage().ref(`/shopItems/${query}`).child(image.name)
-//     .getDownloadURL().then(function(imageURL){
-//       tempImageURLs.push(imageURL)
-//     })
-// })
-
-// var doc = db.collection('shop').doc()
-//     doc.set({
-//       name,
-//       query,
-//       price,
-//       details,
-//       specs,
-//       images: {tempImageURLs},
-//       created: firebase.firestore.Timestamp.now(),
-//     })
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
@@ -111,7 +116,7 @@ const submitItem = async (name, query, price, details, specs) => {
     <IconButton
       className={classes.closeButton}
       onClick={() => {
-        props.onClose(null);
+        props.onClose()
       }}
     >
       <CloseIcon />
@@ -127,8 +132,11 @@ const submitItem = async (name, query, price, details, specs) => {
       </div>
       <GridList cellHeight={200} className={classes.gridList} cols={3}>
         {images.map((image, i)=> (
-            <GridListTile cols={1}>
+            <GridListTile cols={1} key={i}>
                     <img src={image} key={i}/>
+                    <IconButton className={classes.removeImage} onClick={() => {removeImage(i)}}>
+                      <CloseIcon />
+                    </IconButton>
             </GridListTile>
         ))}
       </GridList>

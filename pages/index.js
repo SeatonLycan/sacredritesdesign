@@ -29,6 +29,7 @@ export default function Home() {
   const [items, setItems] = useState([])
   const admin = useContext(AdminContext)
   const [addItemDialogOpen, setAddItemDialogOpen] = useState(false)
+  const [itemAdded, setItemAdded] = useState(null)
  
   useEffect(() => {
     const tempItems = []
@@ -41,7 +42,7 @@ export default function Home() {
       setItems(tempItems)
     }
     getItems()
-  }, [])
+  }, [itemAdded])
 
   const handleListItemClick = (value) => {
     setOpenDialog(true)
@@ -60,8 +61,11 @@ export default function Home() {
   const handleAddToCart = (item) => {
     Cookies.set('item_' + item, item, { expires: 1})
   }
-  const closeAddItemDialog = (value) => {
-    setAddItemDialogOpen(value)
+  const closeAddItemDialog = () => {
+    setAddItemDialogOpen(false)
+  }
+  const checkItemAdded = () => {
+    setItemAdded(true)
   }
 
   return (
@@ -113,6 +117,7 @@ export default function Home() {
       >
         <AddItemDialog 
           onClose={closeAddItemDialog}
+          itemAdded={checkItemAdded}
         />
       </Dialog>
     </div>

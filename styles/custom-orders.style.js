@@ -41,11 +41,13 @@ export default makeStyles((theme) => createStyles({
       marginBottom: '20px'
   },
   dialogImage: {
-    objectFit: 'cover',
-    height: '100vh',
+    height: '85vh',
     width: 'auto',
+    [theme.breakpoints.down('md')]: {
+      height: '75vh'
+  },
     [theme.breakpoints.down('sm')]: {
-      height: '60vh'
+      height: '50vh'
    },
   },
   closeIcon: {
@@ -56,5 +58,15 @@ export default makeStyles((theme) => createStyles({
     [theme.breakpoints.down('sm')]: {
       left: '90%'
    },
+  },
+  backArrow: {
+    position: 'fixed',
+    top: '50%',
+    left: '5%'
+  },
+  forwardArrow: {
+    position: 'fixed',
+    top: '50%',
+    right: '5%'
   }
 }));

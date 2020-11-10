@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import firebase from '../firebase/firebase'
 import Head from 'next/head'
 import Link from 'next/link'
 import GridList from '@material-ui/core/GridList'
@@ -10,51 +11,43 @@ import { useTheme } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
 import CloseIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
-
-const shopItems = [
-    {
-        img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1547251665196-GNPP6U0JL1Y3QCAG85A5/ke17ZwdGBToddI8pDm48kDpFLiCYVJtCSGnHP9kSlixZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIkJ-ieHAFD0oDIPV4W_ebuO132jVxWscDmzpZMAj1xf8KMshLAGzx4R3EDFOm1kBS/IMG_2151.jpg?format=500w",
-        title: '1',
-        cols: 1
-    },
-  {
-    img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1544331539076-EH41Z6NEGD00VAQ93J6C/ke17ZwdGBToddI8pDm48kN70YYSF1TxmNTlRAyUWn0RZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpznf815F2ZqBpT5ZgSi03z9sU-FpNrFuoNexlLMOlQ23dvz4lqtZ9uo1sfXwlurdPQ/IMG_1320.JPG?format=300w",
-    title: '2',
-    cols: 1,
-  },
-  {
-      img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1544331327428-VZTPTJ71KLV2F89TE5BE/ke17ZwdGBToddI8pDm48kCXTVg0ByO0p77g6bpZL7-t7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmT2Rk9u7KA3hFIM978bk877VmOHOCSpdsNlW7GlpXIXYQVtHu55YcHOEzPLgr3oRG/IMG_0319.JPG?format=300w",
-      title: '3',
-      cols: 1,
-  },
-  {
-      img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1574454263759-PKVZE75D7GO9IXPACY1H/ke17ZwdGBToddI8pDm48kCa4FqoOAuY54kaNznF3Jhd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTm1v6GcKqh6mrhfxzW2tqo726BsENwc0JvpAjvzF11qiA9VxmGATaW1PGU4Hr10co2/CFA0D9D0-E876-4603-88A5-5EA7722667F2.JPG?format=300w",
-      title: '4',
-      cols: 1,
-  },
-  {
-      img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1544331583648-6ZS7NSZVLSD5CLT5532Q/ke17ZwdGBToddI8pDm48kMh3mVmBaCAeGwqCLG3iONRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIarJWwnumkapRz_nmTYj1dpaH2rx--_BA62nv3IYPJxMKMshLAGzx4R3EDFOm1kBS/IMG_1771.JPG?format=300w",
-      title: '5',
-      cols: 1
-  },
-  {
-      img: "https://images.squarespace-cdn.com/content/v1/58e583053a0411bf4edc7573/1550624047697-8WXNAXRJ9TMB86QFIRQ0/ke17ZwdGBToddI8pDm48kOVY4cr8Ro_WOELIhyTbIpwUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcxoRdRtkhBBTmRM2uYn9AK_qZrcZph2QJRARr4P-wlPhWkzghQb4Hn0bBWWncbiVX/IMG_2460.JPG?format=500w",
-      title: '6',
-      cols: 1
-  }
-]
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import Fab from '@material-ui/core/Fab'
+import AddIcon from '@material-ui/icons/Add'
+import AdminContext from '../contexts/AdminContext'
+import AddCustomDialog from '../components/AddCustomDialog'
 
 export default function CustomOrders() {
   const classes = useStyles()
-  const [open, setOpen] = React.useState([])
+  const [open, setOpen] = useState([])
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('sm'))
   const [openDialog, setOpenDialog] = useState(false)
-  const [dialogImage, setDialogImage] = useState('')
+  const [dialogIndex, setDialogIndex] = useState('')
+  const admin = useContext(AdminContext)
+  const [addItemDialogOpen, setAddItemDialogOpen] = useState(false)
+  const [itemAdded, setItemAdded] = useState(null)
+  const [customItems, setCustomItems] = useState([])
 
-  const handleListItemClick = (value) => {
+  useEffect(() => {
+    const tempImageURLs = []
+    const getImages = async () => {
+      await firebase.storage().ref('customItems/').listAll().then(async function(res) {
+        for (const item of res.items){
+          await item.getDownloadURL().then(function(url) {
+            tempImageURLs.push(url)
+            })
+          }
+        })
+      setCustomItems(tempImageURLs)
+    }
+  getImages()
+  }, [itemAdded])
+
+  const handleListItemClick = (i) => {
     setOpenDialog(true)
-    setDialogImage(value)
+    setDialogIndex(i)
   }
   const handleMouseOver = (i) => {
     const newOpen = [...open]
@@ -65,6 +58,30 @@ export default function CustomOrders() {
       const newOpen = [...open]
       newOpen[i] = false
       setOpen(newOpen)
+  }
+  const closeAddItemDialog = () => {
+    setAddItemDialogOpen(false)
+  }
+  const checkItemAdded = () => {
+    setItemAdded(true)
+  }
+  const handleNextItem = () => {
+    const listLength = customItems.length
+    if (dialogIndex === listLength - 1){
+      setDialogIndex(0)
+    }
+    else{
+      setDialogIndex(dialogIndex + 1)
+    }
+  }
+  const handlePreviousItem = () => {
+    const listLength = customItems.length
+    if (dialogIndex === 0){
+      setDialogIndex(listLength -1)
+    }
+    else{
+      setDialogIndex(dialogIndex - 1)
+    }
   }
 
   return (
@@ -85,11 +102,11 @@ export default function CustomOrders() {
       </div>
       <div className={classes.root}>
         <GridList className={classes.gridList} cellHeight={matches ? 200 : 300} cols={3}>
-          {shopItems.map((item, i) => (
-            <GridListTile key={item.img} cols={item.cols || 1} 
+          {customItems.map((item, i) => (
+            <GridListTile key={item} cols={item.cols || 1} 
               onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}
-                onClick={() => {handleListItemClick(item.img)}}>
-                <img src={item.img} alt={item.title} />
+                onClick={() => {handleListItemClick(i)}}>
+                <img src={item} alt={item} />
                 {open[i] === true ? 
                   <div className={classes.curtain} >
                   </div> : null}
@@ -99,10 +116,44 @@ export default function CustomOrders() {
       </div>
     </div>
 
-    <Dialog onClose={() => {setOpenDialog(false)}} open={openDialog}>
-        <img className={classes.dialogImage} src={dialogImage}/>
-          <CloseIcon className={classes.closeIcon} onClick={() => {setOpenDialog(false)}}/>
+    <Dialog PaperProps={{
+    style: {
+      backgroundColor: 'transparent',
+      boxShadow: 'none',
+      borderRadius: '0px'
+    },
+  }} maxWidth='md' onClose={() => {setOpenDialog(false)}} open={openDialog}>
+      <img className={classes.dialogImage} src={customItems[dialogIndex]}/>
+      <CloseIcon className={classes.closeIcon} onClick={() => {setOpenDialog(false)}}/>
+      <IconButton className={classes.backArrow} onClick={() => {handlePreviousItem()}}>
+        <ArrowBackIosIcon />
+      </IconButton>
+      <IconButton className={classes.forwardArrow} onClick={() => {handleNextItem()}}>
+        <ArrowForwardIosIcon />
+      </IconButton>
     </Dialog>
+
+    {/* Admin Only: Add Custom Item to shop */}
+    {admin.admin ? 
+      <Fab variant="extended" color="primary" aria-label="add" 
+        onClick={() => {setAddItemDialogOpen(true)}}
+        style={{position: 'fixed', bottom: 10, right: 10}}
+        >
+        <AddIcon />
+        Add Item
+      </Fab> : null
+      }
+      <Dialog
+        onClose={() => setAddItemDialogOpen(false)}
+        open={addItemDialogOpen}
+        fullWidth={true}
+        maxWidth='sm'
+      >
+        <AddCustomDialog 
+          onClose={closeAddItemDialog}
+          itemAdded={checkItemAdded}
+        />
+      </Dialog>
     </>
     )
 }

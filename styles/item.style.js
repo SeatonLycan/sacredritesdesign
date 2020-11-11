@@ -30,6 +30,13 @@ export default makeStyles((theme) => createStyles({
         marginBottom: '40px'
     },
   },
+  itemName: {
+    margin: '0px',
+    fontWeight: 200
+  },
+  itemPrice: {
+    fontWeight: 200
+  },
   divider: {
     width: '40px',
     backgroundColor: 'black', 
@@ -37,7 +44,7 @@ export default makeStyles((theme) => createStyles({
     height: '2px'
   },
   addToCart: {
-      marginTop: '20px',
-      border: "2px solid"
-  }
+    marginTop: '20px',
+    border: "2px solid"
+}
 }));

@@ -18,6 +18,8 @@ import AdminContext from '../contexts/AdminContext'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import AddItemDialog from '../components/AddItemDialog'
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 
 export default function Home() {
   const classes = useStyles()
@@ -33,10 +35,13 @@ export default function Home() {
  
   useEffect(() => {
     const tempItems = []
+    var i = 0
     const getItems = async() => {
-      await db.collection("shop").get().then(async function(querySnapshot) {
+      await db.collection("shop").orderBy('order').get().then(async function(querySnapshot) {
         for (const doc of querySnapshot.docs){
           tempItems.push(doc.data())
+          tempItems[i]['id'] = doc.id
+          i += 1
         }
       })
       setItems(tempItems)
@@ -67,6 +72,83 @@ export default function Home() {
   const checkItemAdded = () => {
     setItemAdded(true)
   }
+  const moveItemRight = async (id, order) => {
+    const tempItems = []
+    var i = 0
+    const higherOrderItem = order + 1
+    const itemListLength = items.length
+
+    if (itemListLength === order){
+      return null
+    }
+    else{
+      console.log('move item to the right')
+      await db.collection('shop').where('order', '==', higherOrderItem).get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(async function(doc) {
+            await db.collection('shop').doc(doc.id)
+              .update({
+                order
+            })
+          })
+        })
+        .then(async () => {
+          await db.collection('shop').doc(id)
+            .update({
+              order: higherOrderItem
+          })
+        })
+        .then(async () => {
+          await db.collection("shop").orderBy('order').get().then(async function(querySnapshot) {
+            for (const doc of querySnapshot.docs){
+              tempItems.push(doc.data())
+              tempItems[i]['id'] = doc.id
+              i += 1
+            }
+          })
+        }
+      )
+      setItems(tempItems)
+    }
+  }
+  const moveItemLeft = async (id, order) => {
+    const tempItems = []
+    var i = 0
+    const lowerOrderItem = order - 1
+
+    if (order === 1){
+      return null
+    }
+    else{
+      console.log('move item to the left')
+      await db.collection('shop').where('order', '==', lowerOrderItem).get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(async function(doc) {
+            await db.collection('shop').doc(doc.id)
+              .update({
+                order
+            })
+          })
+        })
+        .then(async () => {
+          await db.collection('shop').doc(id)
+            .update({
+              order: lowerOrderItem
+          })
+        })
+        .then(async () => {
+            await db.collection("shop").orderBy('order').get().then(async function(querySnapshot) {
+              for (const doc of querySnapshot.docs){
+                tempItems.push(doc.data())
+                tempItems[i]['id'] = doc.id
+                i += 1
+              }
+            })
+          }
+        )
+      setItems(tempItems)
+    }
+  }
 
   return (
     <>
@@ -93,6 +175,18 @@ export default function Home() {
                       onClick={() => {handleListItemClick(i)}}>
                         Quick View
                   </Button>
+                  {admin.admin ? 
+                    <>
+                    <IconButton className={classes.moveItemRight} 
+                      onClick={() => {moveItemRight(item.id, item.order)}} >
+                      <NavigateNextIcon />
+                    </IconButton>
+                    <IconButton className={classes.moveItemLeft} 
+                      onClick={() => {moveItemLeft(item.id, item.order)}} >
+                        <NavigateBeforeIcon />
+                    </IconButton>
+                    </>
+                  : null}
                   </div>
                    : null}
             </GridListTile>

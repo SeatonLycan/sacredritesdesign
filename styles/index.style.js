@@ -57,6 +57,32 @@ export default makeStyles((theme) => createStyles({
        fontWeight: 200,
     },
   },
+  moveItemRight: {
+    position: "absolute",
+    top: '80%',
+    right: '5%',
+    color: "white",
+    lineHeight: '1.3em',
+    fontWeight: 400,
+    border: '1.5px solid',
+    [theme.breakpoints.down('sm')]: {
+       lineHeight: '0.75em',
+       fontWeight: 200,
+    },
+  },
+  moveItemLeft: {
+    position: "absolute",
+    top: '80%',
+    left: '5%',
+    color: "white",
+    lineHeight: '1.3em',
+    fontWeight: 400,
+    border: '1.5px solid',
+    [theme.breakpoints.down('sm')]: {
+       lineHeight: '0.75em',
+       fontWeight: 200,
+    },
+  },
   dialogPaper: {
     minHeight: '80vh',
     maxHeight: '80vh',

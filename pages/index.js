@@ -175,6 +175,7 @@ export default function Home() {
                       onClick={() => {handleListItemClick(i)}}>
                         Quick View
                   </Button>
+                  {/* Admin Only: change item order */}
                   {admin.admin ? 
                     <>
                     <IconButton className={classes.moveItemRight} 
@@ -212,6 +213,7 @@ export default function Home() {
         <AddItemDialog 
           onClose={closeAddItemDialog}
           itemAdded={checkItemAdded}
+          items={items}
         />
       </Dialog>
     </div>

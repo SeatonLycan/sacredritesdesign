@@ -40,7 +40,7 @@ export default makeStyles((theme) => createStyles({
     lineHeight: '1.3em',
     fontWeight: 400,
     [theme.breakpoints.down('sm')]: {
-       lineHeight: '0.75em',
+       lineHeight: '1.0em',
        fontWeight: 200,
        top: '50px'
     },
@@ -66,8 +66,7 @@ export default makeStyles((theme) => createStyles({
     fontWeight: 400,
     border: '1.5px solid',
     [theme.breakpoints.down('sm')]: {
-       lineHeight: '0.75em',
-       fontWeight: 200,
+       top: '70%'
     },
   },
   moveItemLeft: {
@@ -79,8 +78,7 @@ export default makeStyles((theme) => createStyles({
     fontWeight: 400,
     border: '1.5px solid',
     [theme.breakpoints.down('sm')]: {
-       lineHeight: '0.75em',
-       fontWeight: 200,
+      top: '70%'
     },
   },
   dialogPaper: {

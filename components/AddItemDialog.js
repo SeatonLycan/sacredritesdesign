@@ -40,6 +40,7 @@ const AddItemDialog = (props) => {
   const [imageDropped, setImageDropped] = useState(false)
   const [images, setImages] = useState([])
   const [imageFiles, setImageFiles] = useState([])
+  const orderNumber = props.items.length + 1
 
 const onDrop = (files) => {
   files.forEach((file) => {
@@ -71,7 +72,6 @@ const removeImage = (i) => {
   }
 }
 
-// TODO: Fix async function and add redirect after item is posted
 const submitItem = async (name, price, details, specs) => {
   const query = name.replace(' ', '-').toLowerCase()
   const images = []
@@ -99,6 +99,7 @@ const submitItem = async (name, price, details, specs) => {
       specs,
       images,
       created: firebase.firestore.Timestamp.now(),
+      order: orderNumber
     })
     }
   )

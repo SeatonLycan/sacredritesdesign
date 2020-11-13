@@ -68,5 +68,29 @@ export default makeStyles((theme) => createStyles({
     position: 'fixed',
     top: '50%',
     right: '5%'
-  }
-}));
+  },
+  moveItemRight: {
+    position: "absolute",
+    top: '80%',
+    right: '5%',
+    color: "white",
+    lineHeight: '1.3em',
+    fontWeight: 400,
+    border: '1.5px solid',
+    [theme.breakpoints.down('sm')]: {
+       top: '70%'
+    },
+  },
+  moveItemLeft: {
+    position: "absolute",
+    top: '80%',
+    left: '5%',
+    color: "white",
+    lineHeight: '1.3em',
+    fontWeight: 400,
+    border: '1.5px solid',
+    [theme.breakpoints.down('sm')]: {
+      top: '70%'
+    },
+  },
+}))

@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import {useDropzone} from 'react-dropzone'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
-import firebase from '../firebase/firebase'
+import firebase, { db } from '../firebase/firebase'
 
 const useStyles = makeStyles((theme) => ({
   gridList: {
@@ -42,6 +42,7 @@ const AddCustomDialog = (props) => {
   const [imageDropped, setImageDropped] = useState(false)
   const [images, setImages] = useState([])
   const [imageFiles, setImageFiles] = useState([])
+  const orderNumber = props.customItems.length + 1
 
 const onDrop = (files) => {
   files.forEach((file) => {
@@ -68,10 +69,27 @@ const removeImage = () => {
 }
 
 const submitItem = async () => {
+  const tempImages = []
+  var i = 0
+
   const putImages = async () => {
-    firebase.storage().ref(`customItems/${imageFiles.name}`).put(imageFiles)
+    await firebase.storage().ref(`customItems/${imageFiles.name}`).put(imageFiles)
+      .then(async () => {
+        await firebase.storage().ref('customItems/').child(imageFiles.name)
+          .getDownloadURL().then(function(imageURL){
+            tempImages[i] = imageURL
+            i += 1
+          })
+      })
   }
   putImages().then(() => {
+    var doc = db.collection('customItems').doc()
+      doc.set({
+        order: orderNumber,
+        image: tempImages,
+        name: imageFiles.name
+      })
+  }).then(() => {
     props.onClose()
     props.itemAdded()
   })

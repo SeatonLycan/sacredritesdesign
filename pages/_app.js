@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
-import { ThemeProvider } from '@material-ui/core/styles'
+import {StylesProvider, ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../styles/theme'
 import Navbar from '../components/Navbar'
@@ -30,16 +30,18 @@ export default function MyApp(props) {
   return (
     <React.Fragment>
       <AdminContext.Provider value={admin}>
-        <Head>
-          <title>My page</title>
-          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-        </Head>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
-        </ThemeProvider>
+          <Head>
+            <title>Sacred Rites Jewelry</title>
+            <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+          </Head>
+          <StylesProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Navbar />
+              <Component {...pageProps} />
+              <Footer />
+            </ThemeProvider>
+          </StylesProvider>
       </AdminContext.Provider>
     </React.Fragment>
   )

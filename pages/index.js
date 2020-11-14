@@ -237,6 +237,7 @@ export default function Home() {
               className={classes.addToCart}>
                 ADD TO CART
             </Button>
+            <br/>
             <Link href={`/shop/${dialogInfo.query}`}>
               <a className={classes.viewFullItem}>View Full Item</a>
             </Link>

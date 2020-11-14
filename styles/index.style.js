@@ -42,7 +42,7 @@ export default makeStyles((theme) => createStyles({
     [theme.breakpoints.down('sm')]: {
        lineHeight: '1.0em',
        fontWeight: 200,
-       top: '50px'
+       top: '10%'
     },
   },
   dialogViewButton: {
@@ -53,9 +53,15 @@ export default makeStyles((theme) => createStyles({
     fontWeight: 400,
     border: '3px solid',
     [theme.breakpoints.down('sm')]: {
-       lineHeight: '0.75em',
-       fontWeight: 200,
+      top: '40%',
+      lineHeight: '0.75em',
+      fontWeight: 200,
     },
+    [theme.breakpoints.down('xs')]: {
+      lineHeight: '0.6em',
+      fontWeight: 200,
+      fontSize: '12px'
+   },
   },
   moveItemRight: {
     position: "absolute",
@@ -66,7 +72,9 @@ export default makeStyles((theme) => createStyles({
     fontWeight: 400,
     border: '1.5px solid',
     [theme.breakpoints.down('sm')]: {
-       top: '70%'
+      top: '70%',
+      height: '10px',
+      width: '10px'
     },
   },
   moveItemLeft: {
@@ -78,7 +86,9 @@ export default makeStyles((theme) => createStyles({
     fontWeight: 400,
     border: '1.5px solid',
     [theme.breakpoints.down('sm')]: {
-      top: '70%'
+      top: '70%',
+      height: '10px',
+      width: '10px'
     },
   },
   dialogPaper: {
@@ -103,10 +113,9 @@ export default makeStyles((theme) => createStyles({
     top: 0,
     left: 0,
     [theme.breakpoints.down('sm')]: {
-      width: '90%',
+      width: '100%',
       order: 2,
       margin: 'auto',
-      height: 'auto'
    },
   },
   dialogImage: {
@@ -140,8 +149,9 @@ export default makeStyles((theme) => createStyles({
     fontWeight: 200
   },
   viewFullItem: {
-    display: 'block',
     textDecoration: 'underline',
-    paddingTop: '20px'
+  },
+  addToCart: {
+    marginBottom: '20px'
   }
 }));

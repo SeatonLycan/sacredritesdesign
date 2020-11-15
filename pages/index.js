@@ -8,7 +8,7 @@ import useStyles from '../styles/index.style'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
+import MuiDialogContent from '@material-ui/core/DialogContent'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import CloseIcon from '@material-ui/icons/Close'
@@ -171,14 +171,22 @@ export default function Home() {
                     <b className={classes.curtainText}>{item.name}, ${item.price}</b>
                   </div>
                   </Link>
-                  <Button className={classes.dialogViewButton} variant="outlined" color="secondary"
+                  <Button style={{position: "absolute",
+                    top: '50%',
+                    color: "white",
+                    lineHeight: '1.3em',
+                    fontWeight: 400,
+                    border: '1px solid',
+                    padding: '5px',
+                    borderRadius: '5px'}} 
+                    variant="outlined" color="secondary"
                       onClick={() => {handleListItemClick(i)}}>
                         Quick View
                   </Button>
                   {/* Admin Only: change item order */}
                   {admin.admin ? 
                     <>
-                    <IconButton className={classes.moveItemRight} 
+                    <IconButton className={classes.moveItemRight}
                       onClick={() => {moveItemRight(item.id, item.order)}} >
                       <NavigateNextIcon />
                     </IconButton>
@@ -198,9 +206,9 @@ export default function Home() {
       {admin.admin ? 
       <Fab variant="extended" color="primary" aria-label="add" 
         onClick={() => {setAddItemDialogOpen(true)}}
-        style={{position: 'fixed', bottom: 10, right: 10}}
+        style={{position: 'fixed', bottom: 10, right: 10, padding: '8px', borderRadius: '25px', color: 'white', backgroundColor: 'black'}}
         >
-          <AddIcon />
+        <AddIcon />
           Add Item
       </Fab> : null
       }
@@ -218,9 +226,9 @@ export default function Home() {
       </Dialog>
     </div>
 
-    <Dialog fullWidth={true} maxWidth='md' 
+    <Dialog fullWidth={true} maxWidth={matches ? 'xs' : 'md'}
       onClose={() => {setOpenDialog(false)}} open={openDialog}>
-      <DialogContent>
+      <MuiDialogContent>
         <div className={classes.dialogContainer}>
 
           <div className={classes.dialogImageContainer}>
@@ -228,11 +236,11 @@ export default function Home() {
           </div>
           
           <div className={classes.dialogItemInfoContainer}>
-            <h1 className={classes.priceAndName}>{dialogInfo.name}</h1>
+            <h1 className={classes.name}>{dialogInfo.name}</h1>
             <Divider className={classes.divider}/>
-            <h1 className={classes.priceAndName}>${dialogInfo.price}</h1>
-            <h2>{dialogInfo.details}</h2>
-            <h2>{dialogInfo.specs}</h2>
+            <h1 className={classes.price}>${dialogInfo.price}</h1>
+            <p>{dialogInfo.details}</p>
+            <p>{dialogInfo.specs}</p>
             <Button onClick={() => {handleAddToCart(dialogInfo.query)}} variant="outlined" 
               className={classes.addToCart}>
                 ADD TO CART
@@ -248,7 +256,7 @@ export default function Home() {
           </IconButton>
 
         </div>
-      </DialogContent>
+      </MuiDialogContent>
     </Dialog>
     </>
     )

@@ -51,16 +51,18 @@ export default makeStyles((theme) => createStyles({
     color: "white",
     lineHeight: '1.3em',
     fontWeight: 400,
-    border: '3px solid',
+    border: '1px solid',
+    padding: '5px',
+    borderRadius: '5px',
     [theme.breakpoints.down('sm')]: {
       top: '40%',
-      lineHeight: '0.75em',
       fontWeight: 200,
     },
     [theme.breakpoints.down('xs')]: {
-      lineHeight: '0.6em',
+      lineHeight: '1.0em',
       fontWeight: 200,
-      fontSize: '12px'
+      fontSize: '12px',
+      width: '50%'
    },
   },
   moveItemRight: {
@@ -74,7 +76,10 @@ export default makeStyles((theme) => createStyles({
     [theme.breakpoints.down('sm')]: {
       top: '70%',
       height: '10px',
-      width: '10px'
+      width: '10px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      border: 'none'
     },
   },
   moveItemLeft: {
@@ -88,12 +93,15 @@ export default makeStyles((theme) => createStyles({
     [theme.breakpoints.down('sm')]: {
       top: '70%',
       height: '10px',
-      width: '10px'
+      width: '10px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      border: 'none'
     },
   },
   dialogPaper: {
-    minHeight: '80vh',
-    maxHeight: '80vh',
+    minHeight: '60vh',
+    maxHeight: '60vh',
     minWidth: '70vw',
   },
   dialogContainer: {
@@ -104,54 +112,47 @@ export default makeStyles((theme) => createStyles({
    },
   },
   dialogImageContainer: {
-    height: '400px',
-    minHeight: '400px',
-    marginBottom: '10px',
-    width: '400px',
-    minWidth: '40%',
-    position: 'relative',
-    top: 0,
-    left: 0,
+    width: '50%',
     [theme.breakpoints.down('sm')]: {
-      width: '100%',
       order: 2,
-      margin: 'auto',
+      width: '100%'
    },
   },
   dialogImage: {
-    maxHeight: '100%',
-    maxWidth: '100%',
-    minHeight: '100%',
-    minWidth: '100%'
+    width: '100%'
   },
   dialogItemInfoContainer: {
-    marginLeft: '50px',
+    marginLeft: '20px',
     [theme.breakpoints.down('sm')]: {
-      width: '80%',
-      marginLeft: '5%',
+      marginLeft: 0,
+      marginBottom: '20px',
       order: 1,
-      marginBottom: '20px'
    },
   },
   closeIcon: {
     position: 'absolute',
-    top: 10,
-    right: 10,
+    top: 5,
+    right: 5,
     color: 'black'
   },
   divider: {
     width: '40px',
     backgroundColor: 'black', 
-    marginTop: '20px',
+    marginTop: '5px',
     height: '2px'
   },
-  priceAndName: {
-    fontWeight: 200
+  name: {
+    fontWeight: 200,
+    marginTop: '0px',
+  },
+  price: {
+    fontWeight: 200,
+    marginTop: '5px'
   },
   viewFullItem: {
     textDecoration: 'underline',
   },
   addToCart: {
     marginBottom: '20px'
-  }
+  },
 }));

@@ -16,16 +16,17 @@ export default makeStyles((theme) => createStyles({
     width: '500px',
     marginRight: '40px',
     [theme.breakpoints.down('sm')]: {
-        width: '100%',
+        width: '80%',
         order: 1,
+        margin: 'auto'
     },
   },
   gridList: {
-      width: '100%'
+      width: '100%',
   },
   itemInfoContainer: {
     [theme.breakpoints.down('sm')]: {
-        marginLeft: '40px',
+        marginLeft: '10%',
         marginRight: '40px',
         marginBottom: '40px'
     },

@@ -58,11 +58,11 @@ const ShopItem = () => {
       <div className={classes.itemPageContainer}>
         <div className={classes.gridListContainer}>
         <GridList cellHeight={500} spacing={3} className={classes.gridList} cols={1}>
-            {itemInfo.images && itemInfo.images.map((image, i) => (
+            {itemInfo.images ? itemInfo.images.map((image, i) => (
             <GridListTile key={i} cols={1}>
-                <img src={image} alt={item + i} />
+                <img className={classes.gridImage} src={image} alt={item + i} />
             </GridListTile>
-            ))}
+            )): ''}
         </GridList>
         </div>
         <div className={classes.itemInfoContainer}>

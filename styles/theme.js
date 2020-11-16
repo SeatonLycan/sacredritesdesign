@@ -2,7 +2,7 @@ import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 export default responsiveFontSizes((createMuiTheme)({
     typography: {
-        fontFamily: 'Sorts Mill Goudy',
+        fontFamily: 'Proxima Nova',
         button: {
           textTransform: 'none',
         },
@@ -54,6 +54,12 @@ export default responsiveFontSizes((createMuiTheme)({
           root: {
             padding: '10px',
             marginLeft: '10px'
+          }
+        },
+        MuiMenuItem: {
+          root: {
+            minHeight: 'none',
+            height: '48px'
           }
         }
       }

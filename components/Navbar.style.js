@@ -85,6 +85,6 @@ export default makeStyles((theme) => createStyles({
       letterSpacing: '1px',
       textAlign: 'center',
       margin: 'auto',
-      fontSize: '11px'
+      fontSize: '11px',
     }
   }));

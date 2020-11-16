@@ -68,36 +68,55 @@ export default function Navbar() {
               open={Boolean(menuAnchorElement)}
               onClose={handleCloseSmallMenu}
             >
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+              <div>
                 <Link href='/'>
-                  <a className={classes.aSmall}>Shop</a>
+                  <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                    <a className={classes.aSmall}>Shop</a>
+                  </MenuItem>
                 </Link>
-              </MenuItem>
-              <Divider />
+              </div>
+              <div>
+                <Divider />
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                  <Link href='/custom-orders'>
+                      <a className={classes.aSmall}>Customs</a>
+                  </Link>
+                </MenuItem>
+              </div>
+              <div>
+                <Divider />
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                  <Link href='/about'>
+                      <a className={classes.aSmall}>About</a>
+                  </Link>
+                </MenuItem>
+              </div>
+              <div>
+                <Divider />
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                  <Link href='/contact'>
+                      <a className={classes.aSmall}>Contact</a>
+                  </Link>
+                </MenuItem>
+              </div>
+              <div>
+                <Divider />
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                  <Link href='/shopping-cart'>
+                      <a className={classes.aSmall}>Cart</a>
+                  </Link>
+                </MenuItem>
+              </div>
+              {admin.admin ?
+              <div>
+                <Divider />
+              <Link href='/admin'>
               <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/custom-orders'>
-                    <a className={classes.aSmall}>Customs</a>
-                </Link>
+                <a className={classes.aSmall}>Admin</a>
               </MenuItem>
-              <Divider />
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/about'>
-                    <a className={classes.aSmall}>About</a>
-                </Link>
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/contact'>
-                    <a className={classes.aSmall}>Contact</a>
-                </Link>
-              </MenuItem>
-              <Divider />
-              {admin.admin ? 
-              <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <Link href='/admin'>
-                    <a className={classes.aSmall}>Admin</a>
-                </Link>
-              </MenuItem> : null }
+              </Link>
+              </div>
+              : null }
             </Menu>
         </div>
         <div className={classes.headerCenterSmall}>Sacred Rites Jewelry</div>

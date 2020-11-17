@@ -7,7 +7,10 @@ export default makeStyles((theme) => createStyles({
     justifyContent: 'space-around',
   },
   gridList: {
-    width: "80%",
+    width: "90%",
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    },
   },
   curtain: {
     backgroundColor: "rgba(0, 0, 0, 0.7)",
@@ -41,33 +44,30 @@ export default makeStyles((theme) => createStyles({
       marginBottom: '20px'
   },
   dialogImage: {
-    height: '85vh',
-    width: 'auto',
-    [theme.breakpoints.down('md')]: {
-      height: '75vh'
-  },
-    [theme.breakpoints.down('sm')]: {
-      height: '50vh'
-   },
+    width: '100%',
+    height: 'auto',
   },
   closeIcon: {
-    position: 'fixed',
-    left: '95%',
-    top: '5%',
+    color: 'white',
+    position: 'absolute',
+    left: '92.5%',
+    top: 25,
     cursor: 'pointer',
     [theme.breakpoints.down('sm')]: {
       left: '90%'
    },
   },
   backArrow: {
-    position: 'fixed',
-    top: '50%',
-    left: '5%'
+    position: 'absolute',
+    top: '40%',
+    left: 0,
+    color: 'white',
   },
   forwardArrow: {
-    position: 'fixed',
-    top: '50%',
-    right: '5%'
+    position: 'absolute',
+    top: '40%',
+    right: 0,
+    color: 'white'
   },
   moveItemRight: {
     position: "absolute",
@@ -80,6 +80,9 @@ export default makeStyles((theme) => createStyles({
     [theme.breakpoints.down('sm')]: {
        top: '70%'
     },
+    [theme.breakpoints.down('xs')]: {
+      border: 'none'
+    },
   },
   moveItemLeft: {
     position: "absolute",
@@ -91,6 +94,9 @@ export default makeStyles((theme) => createStyles({
     border: '1.5px solid',
     [theme.breakpoints.down('sm')]: {
       top: '70%'
+    },
+    [theme.breakpoints.down('xs')]: {
+      border: 'none'
     },
   },
 }))

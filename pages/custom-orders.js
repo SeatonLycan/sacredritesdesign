@@ -11,8 +11,6 @@ import { useTheme } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
 import CloseIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import AdminContext from '../contexts/AdminContext'
@@ -28,6 +26,7 @@ export default function CustomOrders() {
   const [open, setOpen] = useState([])
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('sm'))
+  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'))
   const [openDialog, setOpenDialog] = useState(false)
   const [dialogIndex, setDialogIndex] = useState('')
   const admin = useContext(AdminContext)
@@ -51,17 +50,6 @@ export default function CustomOrders() {
       setCustomItems(tempItems)
     }
     getItems()
-    // await firebase.storage().ref('customItems/').listAll().then(async function(res) {
-    //   for (const item of res.items){
-    //     tempImageURLs[i] = {}
-    //     tempImageURLs[i]['path'] = item.fullPath
-    //     await item.getDownloadURL().then(function(url) {
-    //       tempImageURLs[i]['url'] = url
-    //       i += 1
-    //       })
-    //     }
-    //   })
-    // setCustomItems(tempImageURLs)
   }, [itemAdded])
 
   const handleListItemClick = (i) => {
@@ -235,18 +223,18 @@ export default function CustomOrders() {
                 <>
                   <div className={classes.curtain} onClick={() => {handleListItemClick(i)}}>
                   </div>
-                  {admin.admin ? 
-                  <>
-                  <IconButton className={classes.moveItemRight} 
-                    onClick={() => {moveItemRight(item.id, item.order)}} >
-                    <NavigateNextIcon />
-                  </IconButton>
-                  <IconButton className={classes.moveItemLeft} 
-                    onClick={() => {moveItemLeft(item.id, item.order)}} >
-                      <NavigateBeforeIcon />
-                  </IconButton>
-                  </>
-                  : null}
+                  {admin.admin && matchesXS === false ? 
+                    <>
+                      <IconButton className={classes.moveItemRight} 
+                        onClick={() => {moveItemRight(item.id, item.order)}} >
+                        <NavigateNextIcon />
+                      </IconButton>
+                      <IconButton className={classes.moveItemLeft} 
+                        onClick={() => {moveItemLeft(item.id, item.order)}} >
+                          <NavigateBeforeIcon />
+                      </IconButton>
+                    </> : null
+                  }
                   </> : null}
             </GridListTile>
           ))}
@@ -260,16 +248,17 @@ export default function CustomOrders() {
       boxShadow: 'none',
       borderRadius: '0px'
       },
-    }} maxWidth='md' onClose={() => {setOpenDialog(false)}} open={openDialog}>
+    }} fullWidth={true} onClose={() => {setOpenDialog(false)}} open={openDialog}>
       {openDialog === true ?
        <img className={classes.dialogImage} src={customItems[dialogIndex].image[0]}/>
        : null }
       <CloseIcon className={classes.closeIcon} onClick={() => {setOpenDialog(false)}}/>
-      <IconButton className={classes.backArrow} onClick={() => {handlePreviousItem()}}>
-        <ArrowBackIosIcon />
+      <IconButton className={classes.backArrow} onClick={() => {handlePreviousItem()}}
+      >
+        <NavigateBeforeIcon style={{fontSize: '40px'}}/>
       </IconButton>
       <IconButton className={classes.forwardArrow} onClick={() => {handleNextItem()}}>
-        <ArrowForwardIosIcon />
+        <NavigateNextIcon style={{fontSize: '40px'}}/>
       </IconButton>
       {admin.admin ?
         <>

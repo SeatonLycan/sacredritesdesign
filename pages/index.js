@@ -26,6 +26,7 @@ export default function Home() {
   const [open, setOpen] = useState([])
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('sm'))
+  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'))
   const [openDialog, setOpenDialog] = useState(false)
   const [dialogInfo, setDialogInfo] = useState([])
   const [items, setItems] = useState([])
@@ -171,20 +172,36 @@ export default function Home() {
                     <b className={classes.curtainText}>{item.name}, ${item.price}</b>
                   </div>
                   </Link>
-                  <Button style={{position: "absolute",
-                    top: '50%',
-                    color: "white",
-                    lineHeight: '1.3em',
-                    fontWeight: 400,
-                    border: '1px solid',
-                    padding: '5px',
-                    borderRadius: '5px'}} 
-                    variant="outlined" color="secondary"
-                      onClick={() => {handleListItemClick(i)}}>
-                        Quick View
-                  </Button>
+                  {matchesXS ? null : 
+                    <Button style={{position: "absolute",
+                      top: '50%',
+                      color: "white",
+                      lineHeight: '1.3em',
+                      fontWeight: 400,
+                      border: '1px solid',
+                      padding: '5px',
+                      borderRadius: '5px'}} 
+                      variant="outlined" color="secondary"
+                        onClick={() => {handleListItemClick(i)}}>
+                          Quick View
+                    </Button>  
+                  }
+                  {matchesXS ? 
+                  <Link href={`/shop/${item.query}`}>
+                    <Button style={{position: "absolute",
+                      top: '50%',
+                      color: "white",
+                      lineHeight: '1.3em',
+                      fontWeight: 400,
+                      border: '1px solid',
+                      padding: '5px',
+                      borderRadius: '5px'}} 
+                      variant="outlined" color="secondary">
+                        View Item
+                    </Button>
+                  </Link> : null }
                   {/* Admin Only: change item order */}
-                  {admin.admin ? 
+                  {admin.admin && matchesXS === false ? 
                     <>
                     <IconButton className={classes.moveItemRight}
                       onClick={() => {moveItemRight(item.id, item.order)}} >
@@ -232,15 +249,26 @@ export default function Home() {
         <div className={classes.dialogContainer}>
 
           <div className={classes.dialogImageContainer}>
-            {dialogInfo.images && <img className={classes.dialogImage} src={dialogInfo.images[0]}/>}
+            <GridList cellHeight={300} className={classes.gridList} cols={1}>
+              {dialogInfo.images && dialogInfo.images.map((image, i)=> (
+                  <GridListTile cols={1} key={i}>
+                    <img src={image} key={i}/>
+                  </GridListTile>
+              ))}
+            </GridList>
           </div>
           
           <div className={classes.dialogItemInfoContainer}>
+            <div>
             <h1 className={classes.name}>{dialogInfo.name}</h1>
+            <IconButton className={classes.closeIcon} onClick={() => {setOpenDialog(false)}}>
+              <CloseIcon />
+            </IconButton>
+            </div>
             <Divider className={classes.divider}/>
             <h1 className={classes.price}>${dialogInfo.price}</h1>
-            <p>{dialogInfo.details}</p>
-            <p>{dialogInfo.specs}</p>
+            <p style={{width: '80%'}}>{dialogInfo.details}</p>
+            <p style={{width: '80%'}}>{dialogInfo.specs}</p>
             <Button onClick={() => {handleAddToCart(dialogInfo.query)}} variant="outlined" 
               className={classes.addToCart}>
                 ADD TO CART
@@ -251,11 +279,8 @@ export default function Home() {
             </Link>
           </div>
 
-          <IconButton className={classes.closeIcon} onClick={() => {setOpenDialog(false)}}>
-            <CloseIcon />
-          </IconButton>
-
         </div>
+
       </MuiDialogContent>
     </Dialog>
     </>

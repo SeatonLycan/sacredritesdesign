@@ -7,15 +7,18 @@ export default makeStyles((theme) => createStyles({
     justifyContent: 'space-around',
   },
   gridList: {
-    width: "80%",
-    transform: 'translateZ(0)'
+    width: "90%",
+    transform: 'translateZ(0)',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    },
   },
   shopTitle: {
     width: "100%",
     textAlign: "center",
     marginBottom: '40px',
     marginTop: '40px',
-    fontSize: '30px'
+    fontSize: '30px',
   },
   curtain: {
     backgroundColor: "rgba(0, 0, 0, 0.7)",
@@ -122,18 +125,29 @@ export default makeStyles((theme) => createStyles({
     width: '100%'
   },
   dialogItemInfoContainer: {
+    position: 'absolute',
+    left: '50%',
     marginLeft: '20px',
+    marginRight: '20px',
+    width: '40%',
     [theme.breakpoints.down('sm')]: {
+      position: 'relative',
+      left: 0,
       marginLeft: 0,
       marginBottom: '20px',
       order: 1,
+      width: '100%'
    },
   },
   closeIcon: {
+    color: 'black',
     position: 'absolute',
-    top: 5,
-    right: 5,
-    color: 'black'
+    top: -5,
+    right: -40,
+    [theme.breakpoints.down('sm')]: {
+      right: -5,
+      top: -2.5
+   },
   },
   divider: {
     width: '40px',
@@ -144,6 +158,7 @@ export default makeStyles((theme) => createStyles({
   name: {
     fontWeight: 200,
     marginTop: '0px',
+    width: '90%'
   },
   price: {
     fontWeight: 200,

@@ -216,7 +216,9 @@ export default function CustomOrders() {
         <GridList className={classes.gridList} cellHeight={matches ? 200 : 300} cols={3}>
           {customItems.map((item, i) => (
             <GridListTile key={item.image[0]} cols={item.cols || 1} 
-              onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}
+              style={{cursor: 'pointer'}}
+              onClick={() => {if (matchesXS === true) {handleListItemClick(i)}}}
+              onMouseOver={() => {if (matchesXS === false) {handleMouseOver(i)}}} onMouseLeave={() => {if (matchesXS === false) {handleMouseLeave(i)}}}
                 >
                 {customItems.length && <img src={item.image[0]} alt={item.image[0]} />}
                 {open[i] === true ? 

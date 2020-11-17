@@ -15,8 +15,9 @@ export default makeStyles((theme) => createStyles({
   gridListContainer: {
     width: '500px',
     marginRight: '40px',
+    height: 'auto',
     [theme.breakpoints.down('sm')]: {
-        width: '80%',
+        width: '100%',
         order: 1,
         margin: 'auto'
     },
@@ -25,6 +26,7 @@ export default makeStyles((theme) => createStyles({
       width: '100%',
   },
   itemInfoContainer: {
+    width: '80%',
     [theme.breakpoints.down('sm')]: {
         marginLeft: '10%',
         marginRight: '40px',
@@ -47,5 +49,9 @@ export default makeStyles((theme) => createStyles({
   addToCart: {
     marginTop: '20px',
     border: "2px solid"
-}
+  },
+  gridImage: {
+    minWidth: '100%',
+    height: 'auto'
+  }
 }));

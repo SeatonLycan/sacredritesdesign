@@ -13,29 +13,31 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import AdminContext from '../../contexts/AdminContext'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import { NextSeo } from 'next-seo'
 
 const ShopItem = () => {
-    const classes = useStyles()
-    const router = useRouter()
-    const { item } = router.query; // Destructuring our router object
-    const [itemInfo, setItemInfo] = useState([])
+  const classes = useStyles()
+  const router = useRouter()
+  const { item } = router.query; // Destructuring our router object
+  const [itemInfo, setItemInfo] = useState([])
 	const admin = useContext(AdminContext)
 	const [anchorEl, setAnchorEl] = useState(null)
 	const [open, setOpen] = useState(false)
-	const [docID, setDocID] = useState()
+  const [docID, setDocID] = useState()
+  console.log(itemInfo)
 
-    useEffect(() => {
-        item && db.collection('shop').where('query', '==', item).get()
-        .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-				setItemInfo(doc.data())
-				setDocID(doc.id)
-            })
-        })
-    }, [item])
+  useEffect(() => {
+      item && db.collection('shop').where('query', '==', item).get()
+      .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+      setItemInfo(doc.data())
+      setDocID(doc.id)
+          })
+      })
+  }, [item])
     
-    const handleAddToCart = (item) => {
-        Cookies.set('item_' + item, item, { expires: 1})
+  const handleAddToCart = (item) => {
+    Cookies.set('item_' + item, item, { expires: 1})
 	}
 	const handleDeleteItem = () => {
 		db.collection('shop').doc(docID).delete()
@@ -51,16 +53,29 @@ const ShopItem = () => {
   
     return (
       <>
-      <Head>
-        <title>{itemInfo.name} - Sacred Rites Jewelry</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      {itemInfo.images ?
+      <NextSeo
+        title={`${itemInfo.name} - Sacred Rites Jewlery`}
+        description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
+        openGraph={{
+          title: itemInfo.name,
+          url: `https://sacredritesjewelry.vercel.app/shop/${item}`,
+          images: [
+          {
+            url: itemInfo.images[0],
+            width: 800,
+            height: 600,
+            alt: 'Sacred Rites Logo'
+          }
+        ]
+        }}
+      /> : null }
       <div className={classes.itemPageContainer}>
         <div className={classes.gridListContainer}>
         <GridList cellHeight={500} spacing={3} className={classes.gridList} cols={1}>
             {itemInfo.images ? itemInfo.images.map((image, i) => (
             <GridListTile key={i} cols={1}>
-                <img className={classes.gridImage} src={image} alt={item + i} />
+                <img className={classes.gridImage} src={image} alt={itemInfo.name + 1} />
             </GridListTile>
             )): ''}
         </GridList>
@@ -98,7 +113,7 @@ const ShopItem = () => {
         </div>
       </div>
       </>
-    );
-  };
+    )
+  }
   
   export default ShopItem

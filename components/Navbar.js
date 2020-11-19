@@ -49,7 +49,7 @@ export default function Navbar() {
       </div>
       <div className={classes.container}>
         <img src="https://firebasestorage.googleapis.com/v0/b/sacred-rites-jewelry.appspot.com/o/siteLogo%2FSR_SNAKE_2.jpg?alt=media&token=fd0a4537-7133-49ed-9e06-014016d3d64b"
-          className={classes.logo} />
+          alt="SacredRitesLogo" className={classes.logo} />
       </div>
       <div className={classes.container}>
         <h1 className={classes.header}>Sacred Rites Jewelry</h1>
@@ -69,11 +69,11 @@ export default function Navbar() {
               onClose={handleCloseSmallMenu}
             >
               <div>
-                <Link href='/'>
-                  <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                <MenuItem onClick={() => {handleCloseSmallMenu()}}>
+                  <Link href='/'>
                     <a className={classes.aSmall}>Shop</a>
-                  </MenuItem>
-                </Link>
+                  </Link>
+                </MenuItem>
               </div>
               <div>
                 <Divider />

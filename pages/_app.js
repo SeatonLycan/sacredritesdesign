@@ -8,6 +8,8 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import AdminContext from '../contexts/AdminContext'
 import { auth } from '../firebase/firebase'
+import { DefaultSeo } from 'next-seo'
+import SEO from '../SEO/next-seo.config'
 
 export default function MyApp(props) {
   const { Component, pageProps } = props
@@ -37,6 +39,7 @@ export default function MyApp(props) {
           <StylesProvider injectFirst>
             <ThemeProvider theme={theme}>
               <CssBaseline />
+              <DefaultSeo {...SEO}/>
               <Navbar />
               <Component {...pageProps} />
               <Footer />

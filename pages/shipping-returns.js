@@ -1,16 +1,19 @@
-import Head from 'next/head'
 import useStyles from '../styles/shipping-returns.style'
 import Divider from '@material-ui/core/Divider'
+import { NextSeo } from 'next-seo'
 
 export default function ShippingReturns() {
     const classes = useStyles()
 
     return (
-        <>
-        <Head>
-            <title>Shipping and Returns - Sacred Rites Jewelry</title>
-            <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
+    <NextSeo
+        title="Shipping and Returns  - Sacred Rites Jewlery"
+        description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
+        openGraph={{
+        url: 'https://sacredritesjewelry.vercel.app/shipping-returns'
+        }}
+    />
       <div className={classes.returnContainer}>
         <p className={classes.returnPolicy}>
             <span className={classes.returnText}>

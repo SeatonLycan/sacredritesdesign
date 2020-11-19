@@ -1,8 +1,8 @@
-import Head from 'next/head'
 import React, { useState } from 'react'
 import useStyles from '../styles/contact.style'
 import Divider from '@material-ui/core/Divider'
 import ContactForm from '../forms/Contact'
+import { NextSeo } from 'next-seo'
 
 export default function About() {
     const classes = useStyles()
@@ -13,11 +13,14 @@ export default function About() {
     }
 
     return (
-        <>
-        <Head>
-            <title>Contact - Sacred Rites Jewelry</title>
-            <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <>
+      <NextSeo
+        title="Contact - Sacred Rites Jewlery"
+        description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
+        openGraph={{
+          url: 'https://sacredritesjewelry.vercel.app/contact'
+        }}
+      />
       <div className={classes.infoContainer}>
         <div className={classes.contact}>Contact</div>
           <p className={classes.info}>

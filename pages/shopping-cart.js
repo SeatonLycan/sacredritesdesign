@@ -1,12 +1,12 @@
 import useStyles from '../styles/shopping-cart.style'
 import { useState, useEffect } from 'react'
-import Head from 'next/head'
 import Cookies from 'js-cookie'
 import { db } from '../firebase/firebase'
 import Divider from '@material-ui/core/Divider'
 import CloseIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
 import CheckoutForm from '../forms/Checkout'
+import { NextSeo } from 'next-seo'
 
 export default function ShoppingCart() {
     const classes = useStyles()
@@ -54,10 +54,13 @@ export default function ShoppingCart() {
 
     return(
         <>
-        <Head>
-            <title>Shopping Cart - Sacred Rites Jewelry</title>
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
+        <NextSeo
+            title="Shopping Cart - Sacred Rites Jewlery"
+            description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
+            openGraph={{
+            url: 'https://sacredritesjewelry.vercel.app/shopping-cart'
+            }}
+        />
         <div className={classes.cartContainer}>
             <div style={{textAlign: 'center'}}>
                 <h1 className={classes.cartTitle}>Shopping Cart</h1>

@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
 import firebase, { db } from '../firebase/firebase'
-import Head from 'next/head'
 import Link from 'next/link'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
@@ -20,6 +19,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import { NextSeo } from 'next-seo'
 
 export default function CustomOrders() {
   const classes = useStyles()
@@ -199,10 +199,13 @@ export default function CustomOrders() {
   return (
     <>
     <div>
-      <Head>
-        <title>Custom Orders - Sacred Rites Jewelry</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <NextSeo
+        title="Custom Orders - Sacred Rites Jewlery"
+        description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
+        openGraph={{
+          url: 'https://sacredritesjewelry.vercel.app/custom-orders'
+        }}
+      />
       <div className={classes.customTitle}>Custom Orders</div>
       <div className={classes.customButtons}>
         <Link href='/contact'>

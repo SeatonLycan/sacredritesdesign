@@ -1,16 +1,19 @@
-import Head from 'next/head'
 import useStyles from '../styles/about.style'
 import Divider from '@material-ui/core/Divider'
+import { NextSeo } from 'next-seo'
 
 export default function About() {
     const classes = useStyles()
 
     return (
-        <>
-        <Head>
-            <title>About - Sacred Rites Jewelry</title>
-            <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <>
+      <NextSeo
+        title="About - Sacred Rites Jewlery"
+        description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
+        openGraph={{
+          url: 'https://sacredritesjewelry.vercel.app/about'
+        }}
+      />
       <div className={classes.quoteContainer}>
         <p className={classes.quote}>
             <span className={classes.quoteText}>

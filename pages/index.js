@@ -20,6 +20,7 @@ import AddIcon from '@material-ui/icons/Add'
 import AddItemDialog from '../components/AddItemDialog'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import { NextSeo } from 'next-seo'
 
 export default function Home() {
   const classes = useStyles()
@@ -154,10 +155,13 @@ export default function Home() {
   return (
     <>
     <div>
-      <Head>
-        <title>Sacred Rites Jewelry</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <NextSeo
+        title="Sacred Rites Jewlery"
+        description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
+        openGraph={{
+          url: 'https://sacredritesjewelry.vercel.app/'
+        }}
+      />
       <div className={classes.shopTitle}>Shop</div>
       <div className={classes.root}>
         <GridList className={classes.gridList} spacing={6} cellHeight={matches ? 200 : 400} cols={3}>

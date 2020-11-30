@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
 import { db } from '../firebase/firebase'
-import Head from 'next/head'
 import Link from 'next/link'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
@@ -39,7 +38,7 @@ export default function Home() {
     const tempItems = []
     var i = 0
     const getItems = async() => {
-      await db.collection("shop").orderBy('order').get().then(async function(querySnapshot) {
+      await db.collection("shop").orderBy('order', 'desc').get().then(async function(querySnapshot) {
         for (const doc of querySnapshot.docs){
           tempItems.push(doc.data())
           tempItems[i]['id'] = doc.id
@@ -66,7 +65,7 @@ export default function Home() {
       setOpen(newOpen)
   }
   const handleAddToCart = (item) => {
-    Cookies.set('item_' + item, item, { expires: 1})
+    Cookies.set('item_' + item, item, { expires: 7})
   }
   const closeAddItemDialog = () => {
     setAddItemDialogOpen(false)
@@ -74,34 +73,58 @@ export default function Home() {
   const checkItemAdded = () => {
     setItemAdded(true)
   }
-  const moveItemRight = async (id, order) => {
+  const moveItemLeft = async (id, order) => {
     const tempItems = []
     var i = 0
-    const higherOrderItem = order + 1
-    const itemListLength = items.length
+    const tempArray = [...items]
+    let prevIndex
+    let index
 
-    if (itemListLength === order){
+    function compare(a, b) {
+      const orderA = a.order
+      const orderB = b.order
+    
+      let comparison = 0
+      if (orderA > orderB) {
+        comparison = 1
+      } else if (orderA < orderB) {
+        comparison = -1
+      }
+      return comparison
+    }
+    
+    tempArray.sort(compare)
+    
+    tempArray.map((item, i) => {
+      if (item.order === order){
+        index = i
+        prevIndex = i + 1
+      }
+      i += 1
+    })
+
+    if (index + 1 === items.length){
       return null
     }
     else{
-      console.log('move item to the right')
-      await db.collection('shop').where('order', '==', higherOrderItem).get()
+      console.log('move item to the left')
+      await db.collection('shop').where('order', '==', tempArray[prevIndex].order).get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(async function(doc) {
             await db.collection('shop').doc(doc.id)
               .update({
-                order
+                order: tempArray[index].order
             })
           })
         })
         .then(async () => {
           await db.collection('shop').doc(id)
             .update({
-              order: higherOrderItem
+              order: tempArray[prevIndex].order
           })
         })
         .then(async () => {
-          await db.collection("shop").orderBy('order').get().then(async function(querySnapshot) {
+          await db.collection("shop").orderBy('order', 'desc').get().then(async function(querySnapshot) {
             for (const doc of querySnapshot.docs){
               tempItems.push(doc.data())
               tempItems[i]['id'] = doc.id
@@ -113,33 +136,59 @@ export default function Home() {
       setItems(tempItems)
     }
   }
-  const moveItemLeft = async (id, order) => {
+  const moveItemRight = async (id, order) => {
     const tempItems = []
     var i = 0
-    const lowerOrderItem = order - 1
+    const tempArray = [...items]
+    let nextIndex
+    let index
 
-    if (order === 1){
+    function compare(a, b) {
+      const orderA = a.order
+      const orderB = b.order
+    
+      let comparison = 0
+      if (orderA > orderB) {
+        comparison = 1
+      } else if (orderA < orderB) {
+        comparison = -1
+      }
+      return comparison
+    }
+    
+    tempArray.sort(compare)
+    
+    tempArray.map((item, i) => {
+      if (item.order === order){
+        index = i
+        nextIndex = i - 1
+      }
+      i += 1
+    })
+
+
+    if (index === 0){
       return null
     }
     else{
-      console.log('move item to the left')
-      await db.collection('shop').where('order', '==', lowerOrderItem).get()
+      console.log('move item to the right')
+      await db.collection('shop').where('order', '==', tempArray[nextIndex].order).get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(async function(doc) {
             await db.collection('shop').doc(doc.id)
               .update({
-                order
+                order: tempArray[index].order
             })
           })
         })
         .then(async () => {
           await db.collection('shop').doc(id)
             .update({
-              order: lowerOrderItem
+              order: tempArray[nextIndex].order
           })
         })
         .then(async () => {
-            await db.collection("shop").orderBy('order').get().then(async function(querySnapshot) {
+            await db.collection("shop").orderBy('order', 'desc').get().then(async function(querySnapshot) {
               for (const doc of querySnapshot.docs){
                 tempItems.push(doc.data())
                 tempItems[i]['id'] = doc.id
@@ -164,9 +213,9 @@ export default function Home() {
       />
       <div className={classes.shopTitle}>Shop</div>
       <div className={classes.root}>
-        <GridList className={classes.gridList} spacing={6} cellHeight={matches ? 200 : 400} cols={3}>
+        <GridList className={classes.gridList} spacing={6} cellHeight={matches ? 250 : 500} cols={3}>
           {items.map((item, i) => (
-            <GridListTile key={item.images[0]} cols={item.cols || 1} 
+            <GridListTile key={item.images[0]} cols={i === 0 ? 2 : 1} rows={i >= 2 ? 0.6 : 1}
               onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}>
                 <img src={item.images[0]} alt={item.title} />
                 {open[i] === true ? 
@@ -255,7 +304,7 @@ export default function Home() {
           <div className={classes.dialogImageContainer}>
             <GridList cellHeight={300} className={classes.gridList} cols={1}>
               {dialogInfo.images && dialogInfo.images.map((image, i)=> (
-                  <GridListTile cols={1} key={i}>
+                  <GridListTile cols={1} key={i} style={{height: 'auto'}}>
                     <img src={image} key={i}/>
                   </GridListTile>
               ))}

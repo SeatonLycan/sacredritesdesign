@@ -40,25 +40,40 @@ const AddItemDialog = (props) => {
   const [imageDropped, setImageDropped] = useState(false)
   const [images, setImages] = useState([])
   const [imageFiles, setImageFiles] = useState([])
-  const orderNumber = props.items.length + 1
+  const items = props.items
+  const orderNumber = items[items.length - 1].order + 1
+
+  function compare(a, b) {
+    const orderA = a.order
+    const orderB = b.order
+  
+    let comparison = 0
+    if (orderA > orderB) {
+      comparison = 1
+    } else if (orderA < orderB) {
+      comparison = -1
+    }
+    return comparison
+  }
+  
+  items.sort(compare)
+  
 
 const onDrop = (files) => {
-  files.forEach((file) => {
   setImageDropped(true)
-  setImageFiles(tempArray => [...tempArray, file])
-
   files.forEach((file) => {
-    const reader = new FileReader()
+  setImageFiles(tempArray => [...tempArray, file])
+  const reader = new FileReader()
 
-    reader.addEventListener('load', function () {
-      setImages(tempArray => [...tempArray, reader.result])
-    }, false);
+  reader.addEventListener('load', function () {
+    setImages(tempArray => [...tempArray, reader.result])
+  }, false);
 
-    if (file) {
-      reader.readAsDataURL(file)
-    }
-  })
-})}
+  if (file) {
+    reader.readAsDataURL(file)
+  }
+})
+}
 
 const removeImage = (i) => {
   const tempImages = [...images]

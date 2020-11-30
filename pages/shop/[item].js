@@ -7,7 +7,6 @@ import GridListTile from '@material-ui/core/GridListTile'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Cookies from 'js-cookie'
-import Head from 'next/head'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import AdminContext from '../../contexts/AdminContext'
@@ -24,7 +23,6 @@ const ShopItem = () => {
 	const [anchorEl, setAnchorEl] = useState(null)
 	const [open, setOpen] = useState(false)
   const [docID, setDocID] = useState()
-  console.log(itemInfo)
 
   useEffect(() => {
       item && db.collection('shop').where('query', '==', item).get()
@@ -72,9 +70,9 @@ const ShopItem = () => {
       /> : null }
       <div className={classes.itemPageContainer}>
         <div className={classes.gridListContainer}>
-        <GridList cellHeight={500} spacing={3} className={classes.gridList} cols={1}>
+        <GridList spacing={3} className={classes.gridList} cols={1}>
             {itemInfo.images ? itemInfo.images.map((image, i) => (
-            <GridListTile key={i} cols={1}>
+            <GridListTile key={i} cols={1} style={{height: 'auto'}}>
                 <img className={classes.gridImage} src={image} alt={itemInfo.name + 1} />
             </GridListTile>
             )): ''}

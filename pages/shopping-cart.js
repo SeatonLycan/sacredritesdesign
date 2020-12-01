@@ -15,7 +15,9 @@ export default function ShoppingCart() {
     const [purchased, setPurchased] = useState(false)
 
     const getCart = () => {
-        const items = Object.values(Cookies.get())
+        let items = Object.values(Cookies.get())
+        items.length ? items = atob(items) : null
+        items.length ? items = JSON.parse(items) : null
         if(items.length){
             const getItems = async () => {
                 await db.collection('shop').where('query', 'in', items).get()
@@ -45,7 +47,17 @@ export default function ShoppingCart() {
     }, [])
 
     const handleRemoveItem = (itemName) => {
-        Cookies.remove('item_' + itemName)
+        let tempCookies = Object.values(Cookies.get())
+        tempCookies.length ? tempCookies = atob(tempCookies) : null
+        tempCookies.length ? tempCookies = JSON.parse(tempCookies) : null
+        tempCookies.length === 1 ? Cookies.remove('cart') : null
+        if (tempCookies.includes(itemName)) {
+            const index = tempCookies.indexOf(itemName)
+            tempCookies.splice(index, 1)
+        }
+        const cookiesJSON = JSON.stringify(tempCookies)
+        const itemsEncode = btoa(cookiesJSON)
+        Cookies.set('cart', itemsEncode, { expires: 7})
         getCart()
     }
     const handlePurchase = () => {

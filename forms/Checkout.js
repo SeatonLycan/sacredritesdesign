@@ -9,7 +9,7 @@ import Cookies from 'js-cookie'
 
 const CheckoutForm = (props) => {
     const [error, setError] = useState(false)
-    const contactEmail = 'slycan42@gmail.com'
+    const contactEmail = 'sacredritesjewelry@gmail.com'
 
     return (
         <Formik

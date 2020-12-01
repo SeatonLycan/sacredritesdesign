@@ -8,7 +8,7 @@ import { db } from '../firebase/firebase'
 
 const ContactForm = (props) => {
     const [error, setError] = useState(false)
-    const contactEmail = 'slycan42@gmail.com'
+    const contactEmail = 'sacredritesjewelry@gmail.com'
 
     return (
         <Formik

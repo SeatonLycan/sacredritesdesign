@@ -65,7 +65,13 @@ export default function Home() {
       setOpen(newOpen)
   }
   const handleAddToCart = (item) => {
-    Cookies.set('item_' + item, item, { expires: 7})
+    let tempCookies = Object.values(Cookies.get())
+    tempCookies.length ? tempCookies = atob(tempCookies) : null
+    tempCookies.length ? tempCookies = JSON.parse(tempCookies) : null
+    {tempCookies.includes(item) ? null : tempCookies.push(item)}
+    const cookiesJSON = JSON.stringify(tempCookies)
+    const itemsEncode = btoa(cookiesJSON)
+    Cookies.set('cart', itemsEncode, { expires: 7})
   }
   const closeAddItemDialog = () => {
     setAddItemDialogOpen(false)

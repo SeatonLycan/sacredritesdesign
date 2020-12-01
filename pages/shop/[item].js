@@ -19,9 +19,9 @@ const ShopItem = () => {
   const router = useRouter()
   const { item } = router.query; // Destructuring our router object
   const [itemInfo, setItemInfo] = useState([])
-	const admin = useContext(AdminContext)
-	const [anchorEl, setAnchorEl] = useState(null)
-	const [open, setOpen] = useState(false)
+  const admin = useContext(AdminContext)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [open, setOpen] = useState(false)
   const [docID, setDocID] = useState()
 
   useEffect(() => {
@@ -35,16 +35,22 @@ const ShopItem = () => {
   }, [item])
     
   const handleAddToCart = (item) => {
-    Cookies.set('item_' + item, item, { expires: 1})
-	}
-	const handleDeleteItem = () => {
-		db.collection('shop').doc(docID).delete()
+    let tempCookies = Object.values(Cookies.get())
+    tempCookies.length ? tempCookies = atob(tempCookies) : null
+    tempCookies.length ? tempCookies = JSON.parse(tempCookies) : null
+    {tempCookies.includes(item) ? null : tempCookies.push(item)}
+    const cookiesJSON = JSON.stringify(tempCookies)
+    const itemsEncode = btoa(cookiesJSON)
+    Cookies.set('cart', itemsEncode, { expires: 7})
+  }
+    const handleDeleteItem = () => {
+        db.collection('shop').doc(docID).delete()
             .then(router.push('/'))
-	}
-	const handleItemOptionsClose = () => {
+    }
+    const handleItemOptionsClose = () => {
         setOpen(false)
-	}
-	const handleItemOptionsOpen = (event) => {
+    }
+    const handleItemOptionsOpen = (event) => {
         setOpen(true)
         setAnchorEl(event.currentTarget)
       }
@@ -82,23 +88,23 @@ const ShopItem = () => {
             <h1 className={classes.itemName}>
                 {itemInfo.name}
                 {admin.admin ? 
-					<>
-					<IconButton onClick={(event)=>{handleItemOptionsOpen(event)}}>
-						<MoreVertIcon />
-					</IconButton>
-					<Menu
-						id="simple-menu"
-						anchorEl={anchorEl}
-						keepMounted
-						open={open}
-						getContentAnchorEl={null}
-						anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-						transformOrigin={{ vertical: "top", horizontal: "left" }}
-						onClose={handleItemOptionsClose}
-						>
-							<MenuItem onClick={handleDeleteItem}>Delete Item</MenuItem>
-					</Menu> 
-					</>: null}
+                    <>
+                    <IconButton onClick={(event)=>{handleItemOptionsOpen(event)}}>
+                        <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={open}
+                        getContentAnchorEl={null}
+                        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                        transformOrigin={{ vertical: "top", horizontal: "left" }}
+                        onClose={handleItemOptionsClose}
+                        >
+                            <MenuItem onClick={handleDeleteItem}>Delete Item</MenuItem>
+                    </Menu> 
+                    </>: null}
             </h1>
             <Divider className={classes.divider}/>
             <h1 className={classes.itemPrice}>${itemInfo.price}</h1>

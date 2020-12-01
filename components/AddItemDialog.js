@@ -88,7 +88,7 @@ const removeImage = (i) => {
 }
 
 const submitItem = async (name, price, details, specs) => {
-  const query = name.replace(' ', '-').toLowerCase()
+  const query = name.split(' ').join('-').toLowerCase()
   const images = []
   var i = 0
 

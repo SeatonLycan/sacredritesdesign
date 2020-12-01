@@ -21,12 +21,9 @@ export default makeStyles((theme) => createStyles({
         margin: 'auto',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        width: '50%',
-        [theme.breakpoints.down('md')]: {
-            width: '70%'
-        },
+        width: '70%',
+        justifyContent: 'space-evenly',
         [theme.breakpoints.down('sm')]: {
             width: '90%'
         },
@@ -37,26 +34,33 @@ export default makeStyles((theme) => createStyles({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
-        width: '50%',
-        [theme.breakpoints.down('md')]: {
-            width: '70%'
-        },
+        width: '65%',
         [theme.breakpoints.down('sm')]: {
-            width: '90%'
+            width: '85%'
         },
     },
     itemImage: {
-        height: '150px',
-        width: '150px',
+        height: '200px',
+        width: '200px',
         marginTop: '20px',
         marginBottom: '20px',
+        marginRight: '40px',
         [theme.breakpoints.down('xs')]: {
             height: '90px',
             width: '90px'
         },
     },
-    nameAndPrice: {
+    itemName: {
         fontSize: '20px',
+        width: '20%',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '15px'
+        },
+    },
+    price: {
+        fontSize: '20px',
+        width: '20%',
+        textAlign: 'center',
         [theme.breakpoints.down('xs')]: {
             fontSize: '15px'
         },
@@ -68,14 +72,25 @@ export default makeStyles((theme) => createStyles({
         fontSize: '24px',
     },
     purchaseInfo: {
-        width: '80%',
+        width: '60%',
         margin: 'auto',
-        marginBottom: '40px'
+        marginBottom: '40px',
+        fontSize: '16px',
+        [theme.breakpoints.down('sm')]: {
+            width: '80%'
+        },
     },
     purchasedMessage: {
         textAlign: 'center',
         fontSize: '24px',
         marginTop: '40px',
         marginBottom: '40px'
+    },
+    deleteButton: {
+        color: 'black',
+    },
+    totals: {
+        fontWeight: 200,
+        lineHeight: '10px'
     }
 }))

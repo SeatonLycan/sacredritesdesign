@@ -38,7 +38,7 @@ export default makeStyles((theme) => createStyles({
   curtainText: {
     display: 'block',
     position: "relative",
-    top: '100px',
+    top: '20%',
     color: "white",
     lineHeight: '1.3em',
     fontWeight: 400,

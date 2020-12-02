@@ -20,6 +20,7 @@ import AddItemDialog from '../components/AddItemDialog'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import { NextSeo } from 'next-seo'
+import ItemAddedSnackbar from '../components/ItemAddedSnackBar'
 
 export default function Home() {
   const classes = useStyles()
@@ -33,6 +34,7 @@ export default function Home() {
   const admin = useContext(AdminContext)
   const [addItemDialogOpen, setAddItemDialogOpen] = useState(false)
   const [itemAdded, setItemAdded] = useState(null)
+  const [openSnackBar, setOpenSnackBar] = useState(false)
  
   useEffect(() => {
     const tempItems = []
@@ -68,6 +70,7 @@ export default function Home() {
     let tempCookies = Object.values(Cookies.get())
     tempCookies.length ? tempCookies = atob(tempCookies) : null
     tempCookies.length ? tempCookies = JSON.parse(tempCookies) : null
+    {tempCookies.includes(item) ? null : setOpenSnackBar(true)}
     {tempCookies.includes(item) ? null : tempCookies.push(item)}
     const cookiesJSON = JSON.stringify(tempCookies)
     const itemsEncode = btoa(cookiesJSON)
@@ -206,6 +209,12 @@ export default function Home() {
       setItems(tempItems)
     }
   }
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setOpenSnackBar(false)
+  }
 
   return (
     <>
@@ -342,6 +351,7 @@ export default function Home() {
 
       </MuiDialogContent>
     </Dialog>
+    <ItemAddedSnackbar handleCloseSnackbar={handleCloseSnackbar} openSnackBar={openSnackBar}/>
     </>
     )
 }

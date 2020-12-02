@@ -13,6 +13,7 @@ import AdminContext from '../../contexts/AdminContext'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import { NextSeo } from 'next-seo'
+import ItemAddedSnackbar from '../../components/ItemAddedSnackBar'
 
 const ShopItem = () => {
   const classes = useStyles()
@@ -23,6 +24,7 @@ const ShopItem = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [open, setOpen] = useState(false)
   const [docID, setDocID] = useState()
+  const [openSnackBar, setOpenSnackBar] = useState(false)
 
   useEffect(() => {
       item && db.collection('shop').where('query', '==', item).get()
@@ -38,22 +40,29 @@ const ShopItem = () => {
     let tempCookies = Object.values(Cookies.get())
     tempCookies.length ? tempCookies = atob(tempCookies) : null
     tempCookies.length ? tempCookies = JSON.parse(tempCookies) : null
+    {tempCookies.includes(item) ? null : setOpenSnackBar(true)}
     {tempCookies.includes(item) ? null : tempCookies.push(item)}
     const cookiesJSON = JSON.stringify(tempCookies)
     const itemsEncode = btoa(cookiesJSON)
     Cookies.set('cart', itemsEncode, { expires: 7})
   }
-    const handleDeleteItem = () => {
-        db.collection('shop').doc(docID).delete()
-            .then(router.push('/'))
+  const handleDeleteItem = () => {
+      db.collection('shop').doc(docID).delete()
+          .then(router.push('/'))
+  }
+  const handleItemOptionsClose = () => {
+      setOpen(false)
+  }
+  const handleItemOptionsOpen = (event) => {
+      setOpen(true)
+      setAnchorEl(event.currentTarget)
+  }
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
     }
-    const handleItemOptionsClose = () => {
-        setOpen(false)
-    }
-    const handleItemOptionsOpen = (event) => {
-        setOpen(true)
-        setAnchorEl(event.currentTarget)
-      }
+    setOpenSnackBar(false)
+  }
   
     return (
       <>
@@ -116,6 +125,7 @@ const ShopItem = () => {
             </Button>
         </div>
       </div>
+      <ItemAddedSnackbar handleCloseSnackbar={handleCloseSnackbar} openSnackBar={openSnackBar}/>
       </>
     )
   }

@@ -15,15 +15,15 @@ export default function Footer(){
                         Shipping & Returns
                     </a>
                 </Link>
-                <IconButton>
+                <IconButton aria-label='Sacred Rites Pinterest'>
                 <a href="https://www.pinterest.com/sacredritesjewelry/" 
-                    target="_blank" rel="noopener noreferrer">
+                    target="_blank" rel="noopener noreferrer" aria-label='Sacred Rites Pinterest'>
                         <PinterestIcon style={{color: 'black'}}/>
                 </a>
                 </IconButton>
-                <IconButton>
+                <IconButton aria-label='Sacred Rites Instagram'>
                     <a href="https://www.instagram.com/sacred_rites_jewelry/" 
-                        target="_blank" rel="noopener noreferrer">
+                        target="_blank" rel="noopener noreferrer" aria-label='Sacred Rites Instagram'>
                             <InstagramIcon style={{color: 'black'}}/>
                     </a>
                 </IconButton>

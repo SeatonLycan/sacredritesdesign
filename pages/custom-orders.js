@@ -200,10 +200,10 @@ export default function CustomOrders() {
     <>
     <div>
       <NextSeo
-        title="Custom Orders - Sacred Rites Jewlery"
+        title="Custom Orders - Sacred Rites Design"
         description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
         openGraph={{
-          url: 'https://sacredritesjewelry.vercel.app/custom-orders'
+          url: 'https://sacredritesdesign.com/custom-orders'
         }}
       />
       <div className={classes.customTitle}>Custom Orders</div>

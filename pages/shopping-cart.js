@@ -68,10 +68,10 @@ export default function ShoppingCart() {
     return(
         <>
         <NextSeo
-            title="Shopping Cart - Sacred Rites Jewlery"
+            title="Shopping Cart - Sacred Rites Design"
             description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
             openGraph={{
-            url: 'https://sacredritesjewelry.vercel.app/shopping-cart'
+            url: 'https://sacredritesdesign.com/shopping-cart'
             }}
         />
         <div className={classes.cartContainer}>

@@ -68,11 +68,11 @@ const ShopItem = () => {
       <>
       {itemInfo.images ?
       <NextSeo
-        title={`${itemInfo.name} - Sacred Rites Jewlery`}
+        title={`${itemInfo.name} - Sacred Rites Design`}
         description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
         openGraph={{
           title: itemInfo.name,
-          url: `https://sacredritesjewelry.vercel.app/shop/${item}`,
+          url: `https://sacredritesdesign.com/shop/${item}`,
           images: [
           {
             url: itemInfo.images[0],
@@ -88,7 +88,7 @@ const ShopItem = () => {
         <GridList spacing={3} className={classes.gridList} cols={1}>
             {itemInfo.images ? itemInfo.images.map((image, i) => (
             <GridListTile key={i} cols={1} style={{height: 'auto'}}>
-                <img className={classes.gridImage} src={image} alt={itemInfo.name + 1} />
+                <img className={classes.gridImage} src={image} alt={itemInfo.name} />
             </GridListTile>
             )): ''}
         </GridList>

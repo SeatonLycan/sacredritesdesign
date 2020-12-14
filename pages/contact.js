@@ -15,10 +15,10 @@ export default function About() {
     return (
       <>
       <NextSeo
-        title="Contact - Sacred Rites Jewlery"
+        title="Contact - Sacred Rites Design"
         description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
         openGraph={{
-          url: 'https://sacredritesjewelry.vercel.app/contact'
+          url: 'https://sacredritesdesign.com/contact'
         }}
       />
       <div className={classes.infoContainer}>

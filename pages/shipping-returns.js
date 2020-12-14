@@ -8,10 +8,10 @@ export default function ShippingReturns() {
     return (
     <>
     <NextSeo
-        title="Shipping and Returns  - Sacred Rites Jewlery"
+        title="Shipping and Returns  - Sacred Rites Design"
         description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
         openGraph={{
-        url: 'https://sacredritesjewelry.vercel.app/shipping-returns'
+        url: 'https://sacredritesdesign.com/shipping-returns'
         }}
     />
       <div className={classes.returnContainer}>

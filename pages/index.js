@@ -35,6 +35,7 @@ export default function Home() {
   const [addItemDialogOpen, setAddItemDialogOpen] = useState(false)
   const [itemAdded, setItemAdded] = useState(null)
   const [openSnackBar, setOpenSnackBar] = useState(false)
+  console.log(items)
  
   useEffect(() => {
     const tempItems = []
@@ -220,10 +221,10 @@ export default function Home() {
     <>
     <div>
     <NextSeo
-        title="Sacred Rites Jewlery"
+        title="Sacred Rites Design"
         description="Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry."
         openGraph={{
-          url: 'https://sacredritesjewelry.vercel.app/'
+          url: 'https://sacredritesdesign.com/'
         }}
       />
       <div className={classes.shopTitle}>Shop</div>
@@ -232,7 +233,7 @@ export default function Home() {
           {items.map((item, i) => (
             <GridListTile key={item.images[0]} cols={i === 0 ? 2 : 1} rows={i >= 2 ? 0.6 : 1}
               onMouseOver={() => {handleMouseOver(i)}} onMouseLeave={() => {handleMouseLeave(i)}}>
-                <img src={item.images[0]} alt={item.title} />
+                <img src={item.images[0]} alt={item.name} />
                 {open[i] === true ? 
                   <div style={{display: 'flex', justifyContent: 'center'}}>
                   <Link href={`/shop/${item.query}`}>

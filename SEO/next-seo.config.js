@@ -1,10 +1,10 @@
 export default {
     openGraph: {
-      title: 'Sacred Rites Jewelry',
+      title: 'Sacred Rites Design',
       type: 'website',
       locale: 'en_IE',
-      url: 'https://www.sacredritesjewelry.vercel.app',
-      site_name: 'Sacred Rites Jewelry',
+      url: 'https://www.sacredritesdesign.com',
+      site_name: 'Sacred Rites Design',
       description: 'Denver-based silversmith and lapidary. Rare gemstones for unique and magical silver jewelry.',
       images: [
         {
@@ -16,7 +16,7 @@ export default {
       ]
     },
     twitter: {
-      site: 'SacredRitesJewelry.com',
+      site: 'SacredRitesDesign.com',
       cardType: 'summary_large_image',
     },
   } 

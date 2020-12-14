@@ -52,7 +52,7 @@ export default function Navbar() {
           alt="SacredRitesLogo" className={classes.logo} />
       </div>
       <div className={classes.container}>
-        <h1 className={classes.header}>Sacred Rites Jewelry</h1>
+        <h1 className={classes.header}>Sacred Rites Design</h1>
       </div>
 
       <div className={classes.containerSmall}>
@@ -110,16 +110,16 @@ export default function Navbar() {
               {admin.admin ?
               <div>
                 <Divider />
-              <Link href='/admin'>
               <MenuItem onClick={() => {handleCloseSmallMenu()}}>
-                <a className={classes.aSmall}>Admin</a>
+                <Link href='/admin'>
+                  <a className={classes.aSmall}>Admin</a>
+                </Link>
               </MenuItem>
-              </Link>
               </div>
               : null }
             </Menu>
         </div>
-        <div className={classes.headerCenterSmall}>Sacred Rites Jewelry</div>
+        <div className={classes.headerCenterSmall}>Sacred Rites Design</div>
         <div className={classes.headerRightSmall}>
         <Link href='/shopping-cart'>
           <IconButton>

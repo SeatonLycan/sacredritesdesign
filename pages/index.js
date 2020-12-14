@@ -33,9 +33,8 @@ export default function Home() {
   const [items, setItems] = useState([])
   const admin = useContext(AdminContext)
   const [addItemDialogOpen, setAddItemDialogOpen] = useState(false)
-  const [itemAdded, setItemAdded] = useState(null)
+  const [itemAdded, setItemAdded] = useState(0)
   const [openSnackBar, setOpenSnackBar] = useState(false)
-  console.log(items)
  
   useEffect(() => {
     const tempItems = []
@@ -81,7 +80,7 @@ export default function Home() {
     setAddItemDialogOpen(false)
   }
   const checkItemAdded = () => {
-    setItemAdded(true)
+    setItemAdded(itemAdded + 1)
   }
   const moveItemLeft = async (id, order) => {
     const tempItems = []

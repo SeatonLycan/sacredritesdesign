@@ -63,6 +63,7 @@ export default function ShoppingCart() {
     }
     const handlePurchase = () => {
         setPurchased(true)
+        Cookies.remove('cart')
     }
 
     return(

@@ -29,7 +29,6 @@ export default makeStyles((theme) => createStyles({
     height: "100%",
     cursor: "pointer",
     fontSize: "24px",
-    fontFamily: 'proximaDova',
     textAlign: "center",
     [theme.breakpoints.down('sm')]: {
       fontSize: '16px'
@@ -166,6 +165,7 @@ export default makeStyles((theme) => createStyles({
   },
   viewFullItem: {
     textDecoration: 'underline',
+    fontSize: '16px'
   },
   addToCart: {
     marginBottom: '20px'

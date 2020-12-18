@@ -335,8 +335,8 @@ export default function Home() {
             </div>
             <Divider className={classes.divider}/>
             <h1 className={classes.price}>${dialogInfo.price}</h1>
-            <p style={{width: '80%'}}>{dialogInfo.details}</p>
-            <p style={{width: '80%'}}>{dialogInfo.specs}</p>
+            <p style={{width: '80%', fontSize: '16px'}}>{dialogInfo.details}</p>
+            <p style={{width: '80%', fontSize: '16px'}}>{dialogInfo.specs}</p>
             <Button onClick={() => {handleAddToCart(dialogInfo.query)}} variant="outlined" 
               className={classes.addToCart}>
                 ADD TO CART

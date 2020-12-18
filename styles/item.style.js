@@ -53,5 +53,8 @@ export default makeStyles((theme) => createStyles({
   gridImage: {
     minWidth: '100%',
     height: 'auto'
-  }
+  },
+  detailsAndSpecs: {
+    fontSize: '16px'
+  },
 }));

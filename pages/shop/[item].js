@@ -117,9 +117,9 @@ const ShopItem = () => {
             </h1>
             <Divider className={classes.divider}/>
             <h1 className={classes.itemPrice}>${itemInfo.price}</h1>
-            <h2>{itemInfo.details}</h2>
-            <h2>{itemInfo.specs}</h2>
-            <Button className={classes.AddToCartButton} onClick={() => {handleAddToCart(itemInfo.query)}}
+            <h2 className={classes.detailsAndSpecs}>{itemInfo.details}</h2>
+            <h2 className={classes.detailsAndSpecs}>{itemInfo.specs}</h2>
+            <Button onClick={() => {handleAddToCart(itemInfo.query)}}
                 variant="outlined">
                     ADD TO CART
             </Button>

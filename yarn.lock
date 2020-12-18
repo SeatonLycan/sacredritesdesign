@@ -5634,6 +5634,11 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeface-sorts-mill-goudy@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/typeface-sorts-mill-goudy/-/typeface-sorts-mill-goudy-1.1.13.tgz#d2e65ccf36b5514354bd47e1ebeac7193ab3ec5f"
+  integrity sha512-itG/2MRX/rnDBN/LX257Qrk5Ftu9/rfAsQirnouQTDlf6wX+4dta97eTZo5Y0ZVsK+YeA1tTk29iItSzkrfInw==
+
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/unicode-canonical-property-names-ecmascript/-/unicode-canonical-property-names-ecmascript-1.0.4.tgz#2619800c4c825800efdd8343af7dd9933cbe2818"

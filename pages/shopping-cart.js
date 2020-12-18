@@ -118,9 +118,9 @@ export default function ShoppingCart() {
             <>
             {cartItems.length ? 
                 <div className={classes.checkout}>
-                    <h3 className={classes.totals}>Total -  ${subtotal}.00</h3>
-                    <h3 className={classes.totals}>Shipping Fee -  $7.00</h3>
-                    <h1 className={classes.totals}>Subtotal -  ${subtotal + 7}.00</h1>
+                    <h3 className={classes.totals}>Total: ${subtotal}.00</h3>
+                    <h3 className={classes.totals}>Shipping Fee:  $7.00</h3>
+                    <h1 className={classes.totals}>Subtotal:  ${subtotal + 7}.00</h1>
                     <CheckoutForm items={cartItems} handlePurchase={handlePurchase}/>
                 </div> : null }
             </>

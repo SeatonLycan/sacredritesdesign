@@ -1,12 +1,17 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import "typeface-sorts-mill-goudy"
 
 export default responsiveFontSizes((createMuiTheme)({
     typography: {
-        fontFamily: 'Proxima Nova',
-        button: {
-          textTransform: 'none',
-        },
+      fontFamily: [
+        'Sorts Mill Goudy',
+        'serif',
+      ].join(','),
+      button: {
+        textTransform: 'none',
       },
+      fontWeight: 400
+    },
     shape: {
       borderRadius: 10,
     },
@@ -23,7 +28,6 @@ export default responsiveFontSizes((createMuiTheme)({
         color: 'black',
         textDecoration: 'none',
         margin: '5px',
-        fontFamily: 'proximaDova',
         fontFize: '12px',
         fontHeight: '400',
         fontStyle: 'normal',

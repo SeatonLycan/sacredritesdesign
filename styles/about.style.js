@@ -17,7 +17,6 @@ export default makeStyles((theme) => createStyles({
         marginTop: "40px",
         marginBottom: "40px",
         width: "60%",
-        fontFamily: 'proximanova',
         fontSize: '24px',
         fontWeight: 300,
         letterSpacing: '0px',

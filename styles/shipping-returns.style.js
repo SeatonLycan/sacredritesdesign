@@ -17,14 +17,10 @@ export default makeStyles((theme) => createStyles({
         marginTop: "40px",
         marginBottom: "40px",
         width: "60%",
-        fontFamily: 'proximanova',
         fontSize: '24px',
         fontWeight: 300,
         letterSpacing: '0px',
         lineHeight: '2em',
-        [theme.breakpoints.down('sm')]: {
-            width: "90%"
-          },
     },
     returnText: {
         display: "block"
@@ -58,6 +54,7 @@ export default makeStyles((theme) => createStyles({
         marginBottom: '20px'
     },
     returnMessage: {
-        fontSize: '16px'
+        fontSize: '16px',
+        lineHeight: '0.5em'
     }
 }))

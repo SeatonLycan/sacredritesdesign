@@ -21,7 +21,6 @@ export default makeStyles((theme) => createStyles({
     height: "100%",
     cursor: "pointer",
     fontSize: "24px",
-    fontFamily: 'proximaDova',
     textAlign: "center",
   },
   curtainText: {

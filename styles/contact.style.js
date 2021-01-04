@@ -30,7 +30,10 @@ export default makeStyles((theme) => createStyles({
     contactFormContainer: {
         width: '70%',
         margin: 'auto',
-        padding: '20px'
+        padding: '20px',
+        [theme.breakpoints.down('sm')]: {
+            width: '95%'
+        },
     },
     responseContainer: {
         height: '100px',

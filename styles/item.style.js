@@ -13,14 +13,17 @@ export default makeStyles((theme) => createStyles({
     },
   },
   gridListContainer: {
-    width: '500px',
+    width: '600px',
     marginRight: '40px',
     height: 'auto',
     [theme.breakpoints.down('sm')]: {
-        width: '100%',
+        width: '80%',
         order: 1,
         margin: 'auto'
     },
+    [theme.breakpoints.down('xs')]: {
+      width: '100%'
+  },
   },
   gridList: {
       width: '100%',
@@ -52,7 +55,7 @@ export default makeStyles((theme) => createStyles({
   },
   gridImage: {
     minWidth: '100%',
-    height: 'auto'
+    height: '500px',
   },
   detailsAndSpecs: {
     fontSize: '16px'

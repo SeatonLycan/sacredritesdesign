@@ -240,7 +240,7 @@ export default function Home() {
                     <b className={classes.curtainText}>{item.name}, ${item.price}</b>
                   </div>
                   </Link>
-                  {matchesXS ? null : 
+                  {matches ? null : 
                     <Button style={{position: "absolute",
                       top: '50%',
                       color: "white",
@@ -254,7 +254,7 @@ export default function Home() {
                           Quick View
                     </Button>  
                   }
-                  {matchesXS ? 
+                  {matches ? 
                   <Link href={`/shop/${item.query}`}>
                     <Button style={{position: "absolute",
                       top: '50%',

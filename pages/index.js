@@ -319,7 +319,7 @@ export default function Home() {
           <div className={classes.dialogImageContainer}>
             <GridList cellHeight={300} className={classes.gridList} cols={1}>
               {dialogInfo.images && dialogInfo.images.map((image, i)=> (
-                  <GridListTile cols={1} key={i} style={{height: 'auto'}}>
+                  <GridListTile cols={1} key={i} style={{height: '500px'}}>
                     <img src={image} key={i}/>
                   </GridListTile>
               ))}

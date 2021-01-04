@@ -114,7 +114,7 @@ export default makeStyles((theme) => createStyles({
    },
   },
   dialogImageContainer: {
-    width: '50%',
+    width: '500px',
     [theme.breakpoints.down('sm')]: {
       order: 2,
       width: '100%'

@@ -87,7 +87,7 @@ const ShopItem = () => {
         <div className={classes.gridListContainer}>
         <GridList spacing={3} className={classes.gridList} cols={1}>
             {itemInfo.images ? itemInfo.images.map((image, i) => (
-            <GridListTile key={i} cols={1} style={{height: '500px'}}>
+            <GridListTile key={i} cols={1} style={{height: 'auto'}}>
                 <img className={classes.gridImage} src={image} alt={itemInfo.name} />
             </GridListTile>
             )): ''}
